@@ -1,0 +1,36 @@
+export WHEREAT_ENVIRONMENT="DEVELOPMENT"
+
+export WHEREAT_ROOT="$HOME/-/whereat/code/"
+export WHEREAT_SCRIPTS="$WHEREAT_ROOT/whereat-bash"
+
+export WHEREAT_GOOGLE_ANDROID_API_KEY="AIzaSyDDHYJNj12xpGG9Sycnu4d_s0kx4aOacp0"
+export WHEREAT_GOOGLE_BROWSER_API_KEY="AIzaSyC7jVa9oAUOZf7uGn8m8p0I_V0GgcWx3SI"
+export WHEREAT_MAPBOX_API_KEY="pk.eyJ1Ijoid2hlcmVhdCIsImEiOiIxMzU4ZWExMjc4NTIyYzI4MzIxZWRmYzNiZmY2NTA3MCJ9.MxCDW7aJm73sJKLx2ZBxnA"
+
+export WHEREAT_APK_KEY_PASSWORD="G^Gp~jE!xY%2QnX8r$tv7kEg\:(8?hXH"
+export WHEREAT_PRIVATE_KEYSTORE_PASSWORD=";$\ct[V(aL^GytXFa?v4*>^:F2D3~j%^"
+export WHEREAT_PUBLIC_KEYSTORE_PASSWORD="%4RBVb)6sK4u-FEEh/F*c}+4)%/32Lt)"
+
+export WHEREAT_PKP_PUBLIC_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn1MCibIBeOgl6ZFNp/85EYJ2J85wG3soG//HtduSN9YkhBCFf1jw8e19aOISCzbE3ndEiJ038bRsj/4LSDDWW16Ag63MIpQ5qswKfgj4+R/5FkOcgdaxj6f+zk2iIrTFvmNULbILrOwz1/E7cORFjn91zl3+thDAD0qfJaW1qmCKv/3AhYiKnJynJU1k2qP1zXGU3HcbqULb0NSdyUs0+vfoMQTZRs28GP5kkM9QTsAs6jiWWjqw/xYWYmYsXT8yuyirQbAJ9YE0vGT1Hfq9QA0SPvgchb49IqEF9lkK3MKUyQkMzCKpQ3n5eYAcLZPjE87atRm6cpyYAKy/j7aYXQIDAQAB"
+
+export WHEREAT_PKP_BACKUP_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1gJt92elToCkRI72b3KrHgL5GPjr0TwUDl9Fe5REPJKoI02NjEPx18Mj7PWaULLxu2YOfrbwT7qW/gM/v9XPCCCcrPIlHVD63OuOfVqWNZzltH6Z0GGJwolquJ0r46A9rC6IeGYwnOoUSg8Gk6fnKXNjDny59uWkXKiqH/gCB1CTU7ZX7VB6aqHWm8vYNuQ0Y9VUgdJfivqqu3Qb9vZgExdYQ4CalkFHio+awWoGFFtLcJVnoWXijZns5rnewd5ZMgmkpkHf+gx9dIip+0FDy/6bjsv8SvHKm9JV6D6G/Q9y738zM62MajeTX9Y1FqMo4cClGnreK1wAZMi08+SNmwIDAQAB"
+
+export WHEREAT_PKP_EMERGENCY_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAumV/rJLjXNWm2wnrlNZtHNeNPQbKSnlrqw3lUX9NIqt5cdB9UX8Mb7D8Wg/wgbPtNGCR66f5paJnqEux+Sb0dHWMjEv/VjSd/Dw6yT7QBDKcqCZiV12Nt4LhGq4TlRyrw4yPfRjIteHS1AoqKyMDCFDQMNen/D/kViTSTwpRyRRLvUxbEFTVFYdBXzaUya2GpdC7S4/RY0olysgimq1FVkztR/xHfv48LhNie+qtTqPhttgeXCnwOT7P7ql6941tG+DxPDCm3xT45D5n2T8n2t4F+Qz9fvD7q0HcBjbsgYssi1cLC59fMXMxsaFjpAXiipPGQgqcGogGEtsF9BHjAwIDAQAB"
+
+export WHEREAT_PKP_REPORT_URI=http://whereat.io/pkp-report
+export WHEREAT_PKP_MAX_AGE=500000
+
+export WHEREAT_PROD_DATABASE_URL="postgres://ubg230i3nj6e5f:p5s7uout9gled61rjccm8eanqlf@ec2-54-243-135-16.compute-1.amazonaws.com:5812/d2faj5sqnvn6ke"
+
+export WHEREAT_DEV_DATABASE_URL_OLIVE="postgres://uci7i5nqk0gvt:pb6t0q1t1oht4bfmkaph52pr5ob@ec2-54-235-133-53.compute-1.amazonaws.com:5572/d98g7ilqf9pkiq"
+
+export WHEREAT_DEV_DATABASE_URL="postgres://u3iarc5ukef0n5:pff12ur5rl18hj5hk523oo4urcc@ec2-54-243-135-16.compute-1.amazonaws.com:5822/d37r02f1or8eki"
+
+export WHEREAT_TEST_DATABASE_URL_1="postgres://pomlgigpygoasa:vLDueTmcFT-X2KazMggWlQjjZW@ec2-107-22-175-206.compute-1.amazonaws.com:5432/d9ilcajaebm03l"
+
+export WHEREAT_TEST_DATABASE_URL_2="postgres://laqltucejdssnn:0mc-JVvNojz-2PWRN3D7xD1Q74@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dasj9s1qksahhd"
+
+export WHEREAT_DATABASE_URL_SUFFIX="?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory"
+
+export DEV=whereat-server-dev
+export PROD=whereat-server

@@ -1,0 +1,6 @@
+# map caps lock to control
+
+if [ ${OS} == 'linux' ]
+then
+   setxkbmap -option ctrl:nocaps
+fi

@@ -1,0 +1,6 @@
+if [ ${OS} == 'osx' ]; then
+   # enable brew bash completion
+   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+   # enable bash completion for pass
+   source /usr/local/etc/bash_completion.d/pass
+fi

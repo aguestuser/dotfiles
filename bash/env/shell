@@ -1,0 +1,50 @@
+# hide current path from prompt
+#export PS1='\u@\h:\$ '
+
+# aliases
+
+alias wsh="gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize"
+alias wsv="gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize"
+alias clip="xclip -sel 'clipboard'"
+alias untar="tar xvzf"
+alias timezone-change="sudo dpkg-reconfigure tzdata"
+alias chrome-signed-out="google-chrome %U --password-store=basic"
+
+# tor browser shortcut
+tor-browser-up(){
+  pushd `pwd`
+  cd /opt/tor-browser_en-US
+  ./start-tor-browser.desktop
+  popd
+}
+
+# firefox nightly shortcut & override for opening files
+alias firefox="/opt/firefox-nightly/firefox"
+
+# functions
+
+bigfiles(){
+  sudo du -a $1 | sort -n -r | head -n 10
+}
+
+sharepic(){
+  import png:- | apaste | tee >(xclip) >(xargs notify-send "Upload Complete")
+}
+
+sharepic-tor(){
+  import png:- | apaste -h | tee >(xclip) >(xargs notify-send "Upload Complete")
+}
+
+if [ ${OS} == 'linux' ]
+then
+  alias cpt="tmux save-buffer - | xclip -selection clipboard"
+else # mac
+  alias cpt="tmux save-buffer - | pbcopy"
+fi
+
+
+# functions
+set_title(){
+   echo -en "\033]0;$1\a"
+}
+

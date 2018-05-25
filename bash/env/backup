@@ -1,0 +1,35 @@
+export BACKUP_DIR="/media/aguestuser/backup/"
+
+backup-checkmount(){
+  df -aTh | grep sda
+}
+
+backup-mount(){
+  sudo mkdir -p /media/aguestuser/backup &&
+  sudo mount /dev/sda1 /media/aguestuser/backup
+}
+
+backup-unmount(){
+  sudo umount /dev/sda1
+}
+
+backup(){
+  echo "re-mounting backup drive..."
+  backup-unmount
+  backup-mount
+
+  echo "...backup drive re-mounted!"
+
+  echo "running duplicity..."
+  sudo duplicity --exclude /mnt \
+                 --exclude /media \
+                 --exclude /tmp \
+                 --exclude /proc \
+                 --exclude /sys \
+                 --verbosity info \
+                 / file:///media/aguestuser/backup/tikva-backup/
+  echo "...backup complete!"
+  echo "\n"
+  echo "inspect results with:"
+  echo "ll $BACKUP_DIR"
+}

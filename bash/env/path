@@ -1,0 +1,17 @@
+# home/shared
+
+export USERNAME=aguestuser
+
+if [ ${OS} == 'linux' ]
+then
+  export HOME=/home/${USERNAME}
+  export PATH=$PATH:$HOME/.local/bin
+  export PATH=$PATH:/usr/sbin
+  export PATH=$PATH:/opt
+  export PATH=$PATH:/snap/bin
+else # mac
+  export HOME=/Users/${USERNAME}
+  export PATH=$PATH:/usr/local/sbin
+fi
+
+export SHARED=$HOME/-

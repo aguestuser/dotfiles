@@ -1,0 +1,10 @@
+#emacs
+
+alias em="emacs"
+alias ecn="emacsclient -c -n"
+alias ec="emacsclient -n"
+alias ed="emacs --daemon"
+export EDITOR="emacsclient"
+
+
+

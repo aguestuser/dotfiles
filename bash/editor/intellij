@@ -1,0 +1,2 @@
+export PATH=/opt/idea-IC-143.1184.17/bin:$PATH
+alias idea=idea.sh

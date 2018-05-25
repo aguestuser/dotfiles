@@ -1,0 +1,19 @@
+# set nvm home dir
+if [ ${OS} == 'linux' ]; then
+  export NVM_DIR="/home/aguestuser/.nvm"
+else
+  export NVM_DIR="/Users/aguestuser/.nvm"
+  source $(brew --prefix nvm)/nvm.sh
+fi  
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # load nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias nut="npm run unitTest"
+alias nutw="npm run unitTestWatch"
+alias nuit="npm run unitAndIntegrationTest"
+alias nuitw="npm run unitAndIntegrationTestWatch"
+alias nft="npm run functionalTest"
+alias nftw="npm run functionalTestWatch"
+alias nt="npm run test"
+alias ntw="npm run testWatch"
+alias npg="npm run pregit"

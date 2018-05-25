@@ -1,0 +1,20 @@
+# NOTE:
+# after update, ssh-agent run by x-session-manager is not accessible by keychain (running as me)
+# HACK:
+# kill running ssh-agent (pid should show up in failed keychain attempt)
+# run eval$("ssh-agent") to get agent w/ correct permissions
+# run source ~/.bashrc and setup permissions as per usual
+
+hname=$(echo $HOSTNAME | sed -e 's/.home//g' | sed -e 's/.local//g')
+
+# machine-specific keys
+#if [ $hname == 'tikva' ]; then
+   #$BIN/keychain $HOME/.ssh/id_whereat_${hname}
+   #$BIN/keychain $HOME/.ssh/id_bandicoot_${hname}
+#fi
+
+# base keys
+$BIN/keychain $HOME/.ssh/id_${hname}_${USERNAME}
+$BIN/keychain $HOME/.ssh/id_${hname}_stncl
+
+source $HOME/.keychain/${HOSTNAME}-sh

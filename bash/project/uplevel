@@ -1,0 +1,156 @@
+export UPLEVEL_GOPATH="$HOME/-/code/go/src/github.com/uplevel-technology"
+export UPLEVEL_CODE="$HOME/-/up/code"
+
+export VAULT_TOKEN="LOL"
+export VAULT_HOST="127.0.0.1"
+export VAULT_PORT="8200"
+
+alias upgo="cd $UPLEVEL_GOPATH"
+alias upcode="cd $UPLEVEL_CODE"
+alias upfront="cd $UPLEVEL_CODE && cd frontend"
+
+alias coreosbox="vagrant ssh core-01 -- -A"
+
+alias upfresh="do-upfresh"
+do-upfresh(){
+  pushd `pwd`
+  upcode
+  for repo in "carmen" "dizzy" "eggy" "mariadb" "normalizer" "ontology" "parser" "rico" "satie" "sequencer" "uplevel-golang" "uplevel-python" "server-tools"
+  do
+    cd ${repo}
+    echo "syncing repo for $repo..."
+    git pull origin dev
+    if ls main.go 1> /dev/null 2>&1; then
+       echo "installing go depencencies for $repo..."
+       go get
+       go install
+    fi
+    cd ../
+  done
+  popd
+}
+
+pull-origin(){
+  _repo = "$1"
+  
+}
+
+alias upcheck="do-upcheck"
+do-upcheck(){
+  for process in "sequencer" "eggy" "rico" "carmen" "zim" "dizzy" "nats" "vault"
+  do
+    ps aux | grep ${process} | sed -n '2p';
+  done
+}
+
+alias upstart="do-upstart"
+do-upstart(){
+  #setup
+  pushd `pwd` # store original directory location
+  # for debugging: set -o xtrace # print each command
+
+  echo "==> Starting Persistence Layers"
+
+  neo4j start
+  brew services start rethinkdb
+  brew services start  mariadb
+  brew services start rabbitmq
+  vault server -dev -dev-root-token-id="LOL" &
+
+  echo "==> Starting Go Microservices"
+
+  sequencer -s ${UPLEVEL_GOPATH}/sequencer/data &
+  eggy &
+  rico &
+  carmen &
+  nats &
+  zim --dev -vault-token LOL &
+  dizzy -vault-token LOL &
+
+  
+  echo "==> Starting Ingestors"
+
+  workon ingestor
+  cd ${UPLEVEL_CODE}
+  for path in "parser" "normalizer" "satie" 
+  do
+    cd ${path}
+    python run.py &
+    cd ../
+  done &
+
+  # echo "==> Starting Frontend"
+
+  # cd ${UPLEVEL_CODE}/frontend
+  # npm run debug &
+
+  # teardown
+  popd; # restore original directory location
+  # for debugging: set +o xtrace # stop printing each command
+}
+
+alias upingest="do-upingest"
+do-upingest(){
+
+  #setup
+  pushd `pwd` # store original directory location
+
+  echo "==> Starting Ingestors"
+
+  workon ingestor
+  cd ${UPLEVEL_CODE}
+  for path in "parser" "normalizer" "satie" 
+  do
+    cd ${path}
+    python run.py &
+    cd ../
+  done &
+
+  popd;
+}
+
+alias upintegrate="do-upintegrate"
+do-upintegrate(){
+  #setup
+  pushd `pwd` # store original directory location
+  # for debugging: set -o xtrace # print each command
+
+  echo "==> Starting Persistence Layers"
+
+  neo4j start
+  brew services start rethinkdb
+  brew services start  mariadb
+  brew services start rabbitmq
+  vault server -dev -dev-root-token-id="LOL" &
+
+  echo "==> Starting Go Microservices"
+
+  sequencer -s ${UPLEVEL_GOPATH}/sequencer/data &
+  carmen &
+  nats &
+  zim --dev -va &
+  dizzy -va &
+  
+  echo "==> Starting Ingestors"
+
+  workon ingestor
+  cd ${UPLEVEL_CODE}
+  for path in "parser" "normalizer" "satie" 
+  do
+    cd ${path}
+    python run.py &
+    cd ../
+  done
+
+  echo "==> Starting Frontend"
+
+  cd ${UPLEVEL_CODE}/frontend
+  npm run debug &
+
+  # teardown
+  popd; # restore original directory location
+  # for debugging: set +o xtrace # stop printing each command
+
+  # now run eggy & rico!
+}
+

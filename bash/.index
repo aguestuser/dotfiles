@@ -1,0 +1,10 @@
+# env
+
+source ~/.bash-config/env/.index
+
+# configs
+
+source ~/.bash-config/editor/.index  
+source ~/.bash-config/lang/.index
+source ~/.bash-config/project/.index
+

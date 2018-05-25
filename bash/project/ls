@@ -1,0 +1,10 @@
+export LS_CODE="$HOME/-/ls/code"
+export LS_HOME="$HOME/-/ls/code/littlesis-main"
+alias lsh="cd $LS_HOME"
+
+littlesis() {
+    local PWD=$(pwd)
+    cd ~/-/ls/code/littlesis-main
+    ./littlesis "$@"
+    cd $PWD
+}

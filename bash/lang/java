@@ -1,0 +1,6 @@
+if [ ${OS} == 'linux' ]
+then
+  export JAVA_HOME=/usr/lib/jvm/default-java
+else
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/default-java
+fi

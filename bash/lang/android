@@ -1,0 +1,33 @@
+if [ ${OS} == 'linux' ]
+then
+  export PATH=/opt/android-studio/bin:$PATH
+  export ANDROID_HOME=/home/aguestuser/Android/Sdk
+else # mac
+  export ANDROID_HOME=/Users/aguestuser/Library/Android/sdk
+fi
+
+# all platforms
+
+export ANDROID_SDK=$ANDROID_HOME
+
+# NOTE[ag|3.13.17]: this is the broken (up-to-date) version!
+#export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
+
+# NOTE[ag|3.13.17]: this is the working (old) version!
+export ANDROID_NDK_HOME=$ANDROID_HOME/android-ndk-r12b
+
+export PATH=$ANDROID_NDK_HOME:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/tools/bin:$PATH
+
+export PATH=/home/aguestuser/genymotion:$PATH
+
+alias as=studio.sh
+
+# emulator fix
+# as per: https://stackoverflow.com/questions/42554337/cannot-launch-avd-in-emulatorqt-library-not-found
+if [ ${OS} == 'linux' ]; then
+  function emulator { cd "$(dirname "$(which emulator)")" && ./emulator "$@"; }
+  export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+fi

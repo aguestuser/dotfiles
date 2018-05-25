@@ -1,0 +1,8 @@
+if [ "$(uname)" == 'Darwin' ]
+then
+   export OS=osx
+   export BIN="/usr/local/bin"
+else
+   export OS=linux
+   export BIN="/usr/bin"
+fi

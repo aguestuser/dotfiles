@@ -1,0 +1,9 @@
+#stack
+if [ ${OS} == 'linux' ]
+then
+  export PATH=/home/aguestuser/.stack/programs/x86_64-linux/ghc-7.10.2/bin:PATH:$PATH
+else # mac
+  # ???
+fi
+
+

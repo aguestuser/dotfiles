@@ -1,2 +1,2 @@
-source ~/-/dotfiles/editor/emacs
-source ~/-/dotfiles/editor/intellij
+source ~/-/dotfiles/bash/editor/emacs
+source ~/-/dotfiles/bash/editor/intellij

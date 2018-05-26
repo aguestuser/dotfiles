@@ -1,6 +1,6 @@
-source ~/.bash-config/project/whereat
-# source ~/.bash-config/project/uplevel
-# source ~/.bash-config/project/sc
-source ~/.bash-config/project/riseup
-source ~/.bash-config/project/ls
-source ~/.bash-config/project/affinity
+source ~/-/dotfiles/project/whereat
+# source ~/-/dotfiles/project/uplevel
+# source ~/-/dotfiles/project/sc
+source ~/-/dotfiles/project/riseup
+source ~/-/dotfiles/project/ls
+source ~/-/dotfiles/project/affinity

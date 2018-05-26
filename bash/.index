@@ -1,10 +1,10 @@
 # env
 
-source ~/.bash-config/env/.index
+source ~/-/dotfiles/env/.index
 
 # configs
 
-source ~/.bash-config/editor/.index  
-source ~/.bash-config/lang/.index
-source ~/.bash-config/project/.index
+source ~/-/dotfiles/editor/.index  
+source ~/-/dotfiles/lang/.index
+source ~/-/dotfiles/project/.index
 

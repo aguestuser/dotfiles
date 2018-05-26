@@ -1,21 +1,21 @@
 # utilities
 
-source ~/.bash-config/env/ubuntu-preload
+source ~/-/dotfiles/env/ubuntu-preload
 
 # base configs
 
-source ~/.bash-config/env/os
-source ~/.bash-config/env/path
-source ~/.bash-config/env/keybindings
+source ~/-/dotfiles/env/os
+source ~/-/dotfiles/env/path
+source ~/-/dotfiles/env/keybindings
 
 # configs
 
-source ~/.bash-config/env/backup
-source ~/.bash-config/env/bash-completion
-source ~/.bash-config/env/docker
-source ~/.bash-config/env/git
-source ~/.bash-config/env/screen
-source ~/.bash-config/env/sdkman
-source ~/.bash-config/env/shell
-source ~/.bash-config/env/ssh
-source ~/.bash-config/env/sync
+source ~/-/dotfiles/env/backup
+source ~/-/dotfiles/env/bash-completion
+source ~/-/dotfiles/env/docker
+source ~/-/dotfiles/env/git
+source ~/-/dotfiles/env/screen
+source ~/-/dotfiles/env/sdkman
+source ~/-/dotfiles/env/shell
+source ~/-/dotfiles/env/ssh
+source ~/-/dotfiles/env/sync

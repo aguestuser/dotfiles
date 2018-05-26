@@ -1,7 +1,7 @@
-source ~/.bash-config/lang/android
-source ~/.bash-config/lang/golang
-source ~/.bash-config/lang/java
-source ~/.bash-config/lang/javascript
-source ~/.bash-config/lang/python
-source ~/.bash-config/lang/ruby
-source ~/.bash-config/lang/rust
+source ~/-/dotfiles/lang/android
+source ~/-/dotfiles/lang/golang
+source ~/-/dotfiles/lang/java
+source ~/-/dotfiles/lang/javascript
+source ~/-/dotfiles/lang/python
+source ~/-/dotfiles/lang/ruby
+source ~/-/dotfiles/lang/rust

@@ -1,22 +1,31 @@
 ;;;;;;;;;;;;;;;;;;;;;
-;; javascript mode ;;
+;; Javascript Mode ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(use-package nodejs-repl :ensure t)
-(use-package js2-mode :ensure t)
-(use-package jsx-mode :ensure t)
-(use-package react-snippets :ensure t)
-(use-package ac-js2 :ensure t)
-(use-package js-comint :ensure t)
-(use-package color-identifiers-mode :ensure t)
+(use-package nodejs-repl :ensure t) ;; node repl
+(use-package rjsx-mode :ensure t) ;; new and improved major mode for jsx
+(use-package js-comint :ensure t) ;; run js in inferior process window
+(use-package flycheck-flow :ensure t) ;; flow integration w/ flycheck
+(use-package js-doc :ensure t) ;; javascript JSDOC
+;; (use-package react-snippets :ensure t)
+;; (use-package ac-js2 :ensure t)
+;; (use-package web-mode :ensure t)
 
-(require 'js2-mode)
-;; grabpag of  js-2 stuff
-;; mostly from: https://github.com/howardabrams/dot-files/blob/master/emacs-javascript.org
+;; use rjsx-mode with .js files
+(add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
 
+;; enable JSDOC support when in js2-mode
+(add-hook 'rjsx-mode-hook
+          #'(lambda ()
+              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
+;; Note: since rjsx-mode is an extension of js2-mode, we can still
+;; set js2-mode variables
+
+;; set js2-mode variables
 (setq js-basic-indent 2)
 (setq-default js2-basic-indent 2)
-
 (setq-default js2-basic-offset 2)
 (setq-default js2-auto-indent-p t)
 (setq-default js2-cleanup-whitespace t)
@@ -24,14 +33,77 @@
 (setq-default js2-global-externs "jQuery $")
 (setq-default js2-indent-on-enter-key t)
 (setq-default js2-mode-indent-ignore-first-tab t)
-
 (setq-default js2-global-externs '("module" "require" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
 
-;; We'll let fly do the error parsing...
-;;(setq-default js2-show-parse-errors nil)x
+;; auto-completion
+;; (add-hook 'js2-mode-hook 'ac-js2-mode)
 
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; disable syntax checking in js2-mode
+(setq-default js2-mode-show-parse-errors nil)
+(setq-default js2-mode-show-strict-warnings nil)
+
+;;;;;;;;;;;;
+;; eslint ;;
+;;;;;;;;;;;;
+
+;; disable jshint
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+
+;; find linters in node_modules as opposed to global
+(defun use-js-executables-from-node-modules ()
+  "Set executables of JS checkers from local node modules."
+  (-when-let* ((file-name (buffer-file-name))
+               (root (locate-dominating-file file-name "node_modules"))
+               (module-directory (expand-file-name "node_modules" root)))
+    (pcase-dolist (`(,checker . ,module) '((javascript-jshint . "jshint")
+                                           (javascript-eslint . "eslint")
+                                           (javascript-jscs   . "jscs")))
+      (let ((package-directory (expand-file-name module module-directory))
+            (executable-var (flycheck-checker-executable-variable checker)))
+        (when (file-directory-p package-directory)
+          (set (make-local-variable executable-var)
+               (expand-file-name (concat "bin/" module ".js")
+                                 package-directory)))))))
+;; find eslint in node_modules upon loading flycheck
+(add-hook 'flycheck-mode-hook #'use-js-executables-from-node-modules)
+
+;; use eslint with web-mode
+(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+
+;;;;;;;;;;
+;; Flow ;;
+;;;;;;;;;;
+
+;; assumes you have run instructions here:  https://github.com/flowtype/flow-for-emacs
+(load-file "~/.emacs.d/personal/lang/flow-for-emacs/flow.el")
+
+;; use flow from node_modules instead of global
+(defun use-flow-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (flow (and root
+                    (expand-file-name "node_modules/flow-bin/vendor/flow"
+                                      root))))
+    (when (and flow (file-executable-p flow))
+      (setq-local flycheck-javascript-flow-executable flow))))
+(add-hook 'flycheck-mode-hook #'use-flow-from-node-modules)
+
+(flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
+
+;;;;;;;;;;;
+;; Tests ;;
+;;;;;;;;;;;
+;; mocha test runner
+(use-package mocha :ensure t)
+(add-hook 'rjsx-mode-hook (local-set-key (kbd "M-RET") 'mocha-test-at-point))
+
+
+;;;;;;;;;;;;;;;;
+;; formatting ;;
+;;;;;;;;;;;;;;;;
 
 ;; Place warning font around TODO and others:
 (font-lock-add-keywords 'js2-mode
@@ -45,93 +117,8 @@
             (imenu-add-menubar-index)
             ;; Activate the folding mode
             (hs-minor-mode t)))
-;; repl
-(require 'nodejs-repl)
 
-;; sending stuff to repl
-(require 'js-comint)
-(autoload 'js-comint "js-comint"
-  "Hooking JavaScript interpreter up to the JS Files." t nil)
-
-;; Turn off fancy node prompt
-(setenv "NODE_NO_READLINE" "1")
-
-;; Use node as our repl
-(setq inferior-js-program-command "node")
-
-;; js-specific keybindings
-(add-hook 'js2-mode-hook '(lambda ()
-                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-                            (local-set-key "\C-cb" 'js-send-buffer)
-                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-                            (local-set-key "\C-cl" 'js-load-file-and-go)))
-
-;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-;; (add-hook 'js2-mode-hook
-;;           (lambda ()
-;;             (flycheck-select-checker 'javascript-eslint)
-;;             (flycheck-mode)
-;;             (yas-minor-mode)
-;;             (message "Loaded eslint specific stuff")))
-
-
-;; auto-completion
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; from http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
-
-
-
-;; use web-mode for .js files
-;;(add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
-
-;; ;; http://www.flycheck.org/manual/latest/index.html
-;; (require 'flycheck)
-
-;; ;; turn on flychecking globally
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; ;; disable jshint since we prefer eslint checking
-;; (setq-default flycheck-disabled-checkers
-;;               (append flycheck-disabled-checkers
-;;                       '(javascript-jshint)))
-
-;; ;; use eslint with web-mode for jsx files
-;; (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-;; ;; customize flycheck temp file prefix
-;; (setq-default flycheck-temp-prefix ".flycheck")
-
-;; ;; disable json-jsonlist checking for json files
-;; (setq-default flycheck-disabled-checkers
-;;               (append flycheck-disabled-checkers
-;;                       '(json-jsonlist)))
-
-;;;;;;;;;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;
-;; web mode ;;
-;;;;;;;;;;;;;;
-
-(use-package web-mode :ensure t)
-
-;; basic configs
-(defun config-web-mode ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-style-padding 1)
-  (setq web-mode-script-padding 1)
-  (setq web-mode-block-padding 0)
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-auto-pairing t))
-(add-hook 'web-mode-hook  'config-web-mode)
-
-;; tag-wrapping
+;; wrap in html tag
 (defun wrap-in-html-tag (start end)
   "Wraps the selected text or the point with a tag"
   (interactive "r")
@@ -147,21 +134,45 @@
           '(lambda ()
              (local-set-key "\C-t" 'wrap-in-html-tag)))
 
-;; use eslint instead of jshint
-(setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                      '(javascript-jshint)))
-(flycheck-add-mode 'javascript-eslint 'web-mode)
+;;;;;;;;;;;;;;
+;; web mode ;;
+;;;;;;;;;;;;;;
 
-;; react-specific configs
-(require 'react-snippets)
+;; ;; basic configs
+;; (defun config-web-mode ()
+;;   "Hooks for Web mode."
+;;   (setq web-mode-markup-indent-offset 2)
+;;   (setq web-mode-css-indent-offset 2)
+;;   (setq web-mode-code-indent-offset 2)
+;;   (setq web-mode-style-padding 1)
+;;   (setq web-mode-script-padding 1)
+;;   (setq web-mode-block-padding 0))
+;; (add-hook 'web-mode-hook  'config-web-mode)
 
-;;works:
-(add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode))
-(add-hook 'js2-jsx-mode-hook
-          (lambda ()
-            (when (equal web-mode-content-type "jsx")
-              (flycheck-select-checker 'javascript-eslint)
-              (flycheck-mode)
-              (yas-minor-mode)
-              (message "Loaded jsx specific stuff"))))
+;; ;; tag-wrapping
+;; (defun wrap-in-html-tag (start end)
+;;   "Wraps the selected text or the point with a tag"
+;;   (interactive "r")
+;;   (let (string)
+;;     (if mark-active
+;;         (list (setq string (buffer-substring start end))
+;;               (delete-region start end)))
+;;     (yas-expand-snippet (point)
+;;                         (point)
+;;                         (concat "<${1:p}>" string "$0</${1:$(replace-regexp-in-string \" .*\" \"\" text)}>"))))
+
+;; (add-hook 'web-mode-hook
+;;           '(lambda ()
+;;              (local-set-key "\C-t" 'wrap-in-html-tag)))
+
+
+
+;; ;;works:
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-jsx-mode))
+;; (add-hook 'js2-jsx-mode-hook
+;;           (lambda ()
+;;             (when (equal web-mode-content-type "js")
+;;               (flycheck-select-checker 'javascript-eslint)
+;;               (flycheck-mode)
+;;               (yas-minor-mode)
+;;               (message "Loaded jsx specific stuff"))))

@@ -1,6 +1,6 @@
 # src & dst
 local="~/-"
-remote="mysync:/home/aguestuser/-"
+remote="mysync:~/-"
 
 # files to exclude
 ds=".DS_STORE"

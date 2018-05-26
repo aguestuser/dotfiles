@@ -1,7 +1,7 @@
 source ~/.rvm/scripts/rvm
 
 # dunno why i assumed we always wanted 2.3.3, comment for now
-# export PATH=$PATH:/home/aguestuser/.rvm/gems/ruby-2.3.3/bin
+# export PATH=$PATH:~/.rvm/gems/ruby-2.3.3/bin
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

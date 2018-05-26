@@ -1,6 +1,6 @@
 # set nvm home dir
 if [ ${OS} == 'linux' ]; then
-  export NVM_DIR="/home/aguestuser/.nvm"
+  export NVM_DIR="~/.nvm"
 else
   export NVM_DIR="/Users/aguestuser/.nvm"
   source $(brew --prefix nvm)/nvm.sh

@@ -2,6 +2,14 @@
 
 # setup
 
+* clone submodules (currently only `emacs-flow`):
+
+``` shell
+$ cd ~/-/dotfiles/emacs/lang
+$ git submodule init
+$ git submodule update --init --recursive
+```
+
 * install prelude:
 
 ``` shell
@@ -12,6 +20,7 @@ $ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 
 ``` shell
 $ cd ~/.emacs.d
+$ rm -rf personal
 $ ln -s ~/-/dotfiles/emacs personal
 ```
 

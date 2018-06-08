@@ -1,12 +1,20 @@
 # set nvm home dir
 if [ ${OS} == 'linux' ]; then
-  export NVM_DIR="~/.nvm"
+  export NVM_DIR=${HOME}/.nvm
 else
   export NVM_DIR="/Users/aguestuser/.nvm"
   source $(brew --prefix nvm)/nvm.sh
 fi  
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # load nvm
+
+# load nvm & nvm bash completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# put webstorm on PATH
+export PATH=$PATH:/opt/WebStorm-181.5087.27/bin
+
+# put yarn global bin on PATH
+export PATH=$PATH:${HOME}/.yarn/bin
 
 alias nut="npm run unitTest"
 alias nutw="npm run unitTestWatch"

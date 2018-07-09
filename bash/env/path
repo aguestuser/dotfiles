@@ -12,4 +12,10 @@ else # mac
   export PATH=$PATH:/usr/local/sbin
 fi
 
+# invoke autojump
+. /usr/share/autojump/autojump.sh
+
+# put get on path
+export PATH=$PATH:/opt/geth-linux-amd64-1.8.11-dea1ce05
+
 export SHARED=$HOME/-

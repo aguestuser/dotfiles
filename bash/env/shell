@@ -27,6 +27,11 @@ bigfiles(){
   sudo du -a $1 | sort -n -r | head -n 10
 }
 
+diskspace(){
+  df -h
+  echo "for more commands: https://www.tecmint.com/how-to-check-disk-space-in-linux/"
+}
+
 sharepic(){
   import png:- | apaste | tee >(xclip) >(xargs notify-send "Upload Complete")
 }

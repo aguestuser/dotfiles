@@ -11,6 +11,14 @@
 ;; $ ipython
 ;; [1] import rlipython; rlipython.install()
 
+(setq py-python-command "/usr/bin/python3")
+
+(setq jedi:environment-root "jedi")  ; or any other name you like
+(setq jedi:environment-virtualenv
+      (append python-environment-virtualenv
+              '("--python" "/usr/bin/python3")))
+
+;; 
 ;;;;;;;;;;
 ;; elpy ;;
 ;;;;;;;;;;
@@ -25,7 +33,6 @@
           (require 'elpy))
   :config (progn
             (elpy-enable)
-            (elpy-use-ipython)
             (setq python-shell-interpreter "ipython3")
             (setq python-shell-interpreter-args "--simple-prompt -i")
             (setq elpy-rpc-python-command "python3")

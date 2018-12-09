@@ -26,6 +26,7 @@ backup(){
                  --exclude /tmp \
                  --exclude /proc \
                  --exclude /sys \
+                 --exclude /home/aguestuser/Downloads \
                  --verbosity info \
                  / file:///media/aguestuser/backup/tikva-backup/
   echo "...backup complete!"

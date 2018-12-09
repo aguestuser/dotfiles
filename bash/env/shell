@@ -3,12 +3,14 @@
 
 # aliases
 
+alias wifi="wicd-curses"
 alias wsh="gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize"
 alias wsv="gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize"
 alias clip="xclip -sel 'clipboard'"
 alias untar="tar xvzf"
 alias timezone-change="sudo dpkg-reconfigure tzdata"
 alias chrome-signed-out="google-chrome %U --password-store=basic"
+
 
 # tor browser shortcut
 tor-browser-up(){
@@ -22,6 +24,16 @@ tor-browser-up(){
 alias firefox="/opt/firefox-nightly/firefox"
 
 # functions
+
+pass(){
+  gopass "$@"
+}
+
+kill-riseup-vpn(){
+  sudo pkill -e -f riseup-vpn
+  #sudo riseup-vpn.bitmask-root firewall stop
+  test -f ~/.config/leap/systray.pid && rm -v ~/.config/leap/systray.pid
+}
 
 bigfiles(){
   sudo du -a $1 | sort -n -r | head -n 10

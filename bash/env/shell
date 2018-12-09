@@ -25,6 +25,8 @@ alias firefox="/opt/firefox-nightly/firefox"
 
 # functions
 
+source <(gopass completion bash)
+
 pass(){
   gopass "$@"
 }

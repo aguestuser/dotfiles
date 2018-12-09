@@ -11,6 +11,7 @@ backup-mount(){
 
 backup-unmount(){
   sudo umount /dev/sda1
+  sudo rm -rf /media/aguestuser/backup
 }
 
 backup(){
@@ -29,8 +30,11 @@ backup(){
                  --exclude /home/aguestuser/Downloads \
                  --verbosity info \
                  / file:///media/aguestuser/backup/tikva-backup/
-  echo "...backup complete!"
-  echo "\n"
+  echo "...backup complete!\n"
+
   echo "inspect results with:"
   echo "ll $BACKUP_DIR"
+
+  echo "unmount with:"
+  echo "backup-unmount"
 }

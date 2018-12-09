@@ -1,0 +1,9 @@
+keys-mount(){
+  udisksctl unlock -b /dev/sda1
+  udisksctl mount -b /dev/mapper/luks-e41ebb9d-3069-44e3-b71b-a6714041b14f
+}
+
+keys-unmount(){
+  udisksctl unmount -b /dev/mapper/luks-e41ebb9d-3069-44e3-b71b-a6714041b14f
+  udisksctl lock -b /dev/sda1
+}

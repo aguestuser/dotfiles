@@ -1,25 +1,21 @@
 export BACKUP_DIR="/media/aguestuser/backup/"
 
-backup-checkmount(){
-  df -aTh | grep sda
-}
-
 backup-mount(){
-  sudo mkdir -p /media/aguestuser/backup &&
-  sudo mount /dev/sda1 /media/aguestuser/backup
+  path="${1:-sda1}"
+  udisksctl unlock -b /dev/${path}
+  udisksctl mount -b /dev/mapper/luks-7490fcdf-9a6f-45a8-9216-a33c2801f5e5
 }
 
 backup-unmount(){
-  sudo umount /dev/sda1
-  sudo rm -rf /media/aguestuser/backup
+  path="${1:-sda1}"
+  udisksctl unmount -b /dev/mapper/luks-e41ebb9d-3069-44e3-b71b-a6714041b14f
+  udisksctl lock -b /dev/${path}
 }
 
 backup(){
-  echo "re-mounting backup drive..."
-  backup-unmount
+  echo "mounting backup drive..."
   backup-mount
-
-  echo "...backup drive re-mounted!"
+  echo "...backup drive mounted!"
 
   echo "running duplicity..."
   sudo duplicity --exclude /mnt \
@@ -30,10 +26,16 @@ backup(){
                  --exclude /home/aguestuser/Downloads \
                  --verbosity info \
                  / file:///media/aguestuser/backup/tikva-backup/
+  
+  echo "unmounting backup drive..."
+  backup-unmount
+  echo "...backup drive unmounted!"
+  
   echo "...backup complete!\n"
 
   echo "inspect results with:"
-  echo "ll $BACKUP_DIR"
+  echo "\$ echo mount-backup"
+  echo "\$ ll $BACKUP_DIR"
 
   echo "unmount with:"
   echo "backup-unmount"

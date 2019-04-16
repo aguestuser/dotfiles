@@ -30,30 +30,34 @@
 (global-set-key (kbd "M-J") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-M-J") 'mc/mark-all-like-this)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NOTE: disabling autocopmlete, snippets, and tern for debugging rust w/ lsp setup ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; autocomplete
-(use-package auto-complete :ensure t)
-(require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "~/.emacs.c/ac-dict")
-(ac-config-default)
+;; (use-package auto-complete :ensure t)
+;; (require 'auto-complete)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.c/ac-dict")
+;; (ac-config-default)
 
-(use-package company :ensure t)
-(add-hook 'after-init-hook 'global-company-mode)
+;; (use-package company :ensure t)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
-(use-package tern :ensure t)
-(use-package tern-auto-complete :ensure t)
-(use-package company-tern :ensure t)
+;; (use-package tern :ensure t)
+;; (use-package tern-auto-complete :ensure t)
+;; (use-package company-tern :ensure t)
 
 ;; snippets
-(use-package yasnippet :ensure t)
-(require 'yasnippet)
-(defun ac-yasnippet-mode-setup ()
-  "Append yasnippets as a source to ac-sources."
-  (setq ac-sources (append '(ac-source-yasnippet) ac-sources)))
-(add-hook 'auto-complete-mode-hook 'ac-yasnippet-mode-setup)
+;; (use-package yasnippet :ensure t)
+;; (require 'yasnippet)
+;; (defun ac-yasnippet-mode-setup ()
+;;   "Append yasnippets as a source to ac-sources."
+;;   (setq ac-sources (append '(ac-source-yasnippet) ac-sources)))
+;; (add-hook 'auto-complete-mode-hook 'ac-yasnippet-mode-setup)
 
 ;; syntax-checking
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (require 'flycheck)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; regexp-builder tweaks
 (use-package re-builder :ensure t)
@@ -62,17 +66,28 @@
 
 ;; tern (for autocomplete)
 
-(use-package tern :ensure t)
-(use-package tern-auto-complete :ensure t)
+;; (use-package tern :ensure t)
+;; (use-package tern-auto-complete :ensure t)
 
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (add-hook 'web-mode-hook (lambda () (tern-mode t)))
 
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+;; (eval-after-load 'tern
+;;   '(progn
+;;      (require 'tern-auto-complete)
+;;      (tern-ac-setup)))
 
-(defun delete-tern-process ()
+;; (defun delete-tern-process ()
+;;   (interactive)
+;;   (delete-process "Tern"))
+
+
+;; incrementing numbers
+;; https://www.emacswiki.org/emacs/IncrementNumber
+
+(defun increment-number-at-point ()
   (interactive)
-  (delete-process "Tern"))
+  (skip-chars-backward "0-9")
+  (or (looking-at "[0-9]+")
+      (error "No number at point"))
+  (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))

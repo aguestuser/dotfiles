@@ -3,13 +3,13 @@ alias pip=pip3
 
 export WORKON_HOME=~/Envs
 
-if [ `hostname` == 'tikva' ]
-then
-  source $HOME/.local/bin/virtualenvwrapper.sh
-elif [ `hostname` == 'anarres' ]
-then
-  source /usr/local/bin/virtualenvwrapper.sh
-else # mac
-  source $BIN/virtualenvwrapper.sh
-fi
+# if [ `hostname` == 'tikva' ]
+# then
+#   source $HOME/.local/bin/virtualenvwrapper.sh
+# elif [ `hostname` == 'anarres' ]
+# then
+#   source /usr/local/bin/virtualenvwrapper.sh
+# else # mac
+#   source $BIN/virtualenvwrapper.sh
+# fi
 

@@ -40,6 +40,8 @@ setw -g pane-base-index 1
 # # ssh into servers in new window
 bind-key C-s command-prompt -p "host" "new-window -n %1 'ssh %1'"
 
+# NOTE: to resize pane, use:
+# C-j M-(<-, ->, etc.)
 
 # ------------------------
 # Copy Mode

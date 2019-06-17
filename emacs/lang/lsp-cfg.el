@@ -9,6 +9,7 @@
   :init (progn
           (add-hook 'rust-mode-hook #'lsp)
           (add-hook 'c-mode-hook #'lsp)
+          (add-hook 'python-mode-hook #'lsp)
           (add-hook 'js2-mode-hook #'lsp)
           (add-hook 'web-mode-hook #'lsp)
           (add-hook 'rjsx-mode-hook #'lsp)))

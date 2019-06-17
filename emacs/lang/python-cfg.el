@@ -15,30 +15,27 @@
 
 
 
-;; 
-;;;;;;;;;;
-;; elpy ;;
-;;;;;;;;;;
+;;;;;;;;;;;;;;;;;
+;; python-mode ;;
+;;;;;;;;;;;;;;;;;
 
-;; PYTHON REQUIREMENTS: $ pip3 install flake8 jedi importmagic autopep8
-;; DOCS: https://elpy.readthedocs.io/en/latest/
+;;  we  defer to configs offered in lsp-cfg.el, with the following prereqs:
+;;  pip3 install jedi python-language-server[all]  pyls-mypy
 
-(use-package elpy
+(use-package python-mode
   :ensure t
-  :init (progn
-          ;; (package-initialize)
-          (require 'elpy))
   :config (progn
-            (elpy-enable)
-            (setq python-shell-interpreter "ipython3")
-            (setq python-shell-interpreter-args "--simple-prompt -i")
-            (setq elpy-rpc-python-command "python3")
-            (add-hook 'elpy-mode-hook
-                      '(lambda ()
-                         (local-set-key (kbd "C-c , t") 'elpy-test-nose-runner)))))
+            ;; (setq python-shell-interpreter "python3")
+            ;; (setq python-shell-interpreter-args "-i")
+            (setq python-shell-interpreter "ipython3" python-shell-interpreter-args "--simple-prompt -i")
+            (add-hook 'python-mode-hook (highlight-indentation-mode 1))))
 
-;; set hook for setting highlight indentation colo
-(add-hook 'python-mode-hook (highlight-indentation-mode 1))
+
+;;;;;;;;;;;;;;;
+;; nose-mode ;;
+;;;;;;;;;;;;;;;
+
+(use-package nose-mode :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Jedi (code completion, etc.) ;;
@@ -53,8 +50,9 @@
             (setq jedi:environment-virtualenv
                   (append python-environment-virtualenv
                           '("--python" "/usr/bin/python3")))
-            (setq elpy-rpc-backend "jedi")
-            (setq jedi:complete-on-dot t)))
+            ;; (setq elpy-rpc-backend "jedi")
+            ;; (setq jedi:complete-on-dot t)
+            ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs IPython Notebook (EIN) ;;
@@ -98,3 +96,29 @@
 ;;     M-x ein:notebooklist-open
 ;; ..OR..
 ;; (2) copy and past login token from terminal every time you start
+
+
+;;;;;;;;;;
+;; elpy ;;
+;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; deprecated for now, since we defer to lsp mode...
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; PYTHON REQUIREMENTS: $ pip3 install flake8 jedi importmagic autopep8
+;; DOCS: https://elpy.readthedocs.io/en/latest/
+
+;; (use-package elpy
+;;   :ensure t
+;;   :init (progn
+;;           ;; (package-initialize)
+;;           (require 'elpy))
+;;   :config (progn
+;;             (elpy-enable)
+;;             (setq python-shell-interpreter "ipython3")
+;;             (setq python-shell-interpreter-args "--simple-prompt -i")
+;;             (setq elpy-rpc-python-command "python3")
+;;             (add-hook 'elpy-mode-hook
+;;                       '(lambda ()
+;;                          (local-set-key (kbd "C-c , t") 'elpy-test-nose-runner)))))

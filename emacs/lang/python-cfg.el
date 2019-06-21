@@ -24,7 +24,7 @@
 
 (use-package python-mode
   :ensure t
-  :config (progn
+  :init (progn
             ;; (setq python-shell-interpreter "python3")
             ;; (setq python-shell-interpreter-args "-i")
             (setq python-shell-interpreter "ipython3" python-shell-interpreter-args "--simple-prompt -i")
@@ -44,15 +44,14 @@
 (use-package jedi
   :ensure t
   :config (progn
+            ;; (setq elpy-rpc-backend "jedi")
+            ;; (setq jedi:complete-on-dot t)
             ;; GOTCHA: on first run might require: `M-x jed:install-server`
             (add-hook 'python-mode-hook 'jedi:setup)
             (setq jedi:environment-root "jedi")  ; or any other name you like
             (setq jedi:environment-virtualenv
                   (append python-environment-virtualenv
-                          '("--python" "/usr/bin/python3")))
-            ;; (setq elpy-rpc-backend "jedi")
-            ;; (setq jedi:complete-on-dot t)
-            ))
+                          '("--python" "/usr/bin/python3")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs IPython Notebook (EIN) ;;

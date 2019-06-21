@@ -2,8 +2,13 @@
 ;; ui ;;
 ;;;;;;;;
 
-;; dracula theme is the best theme!!!
+;; dracula theme is the best theme!!!!!!!!!!!!!!
 (use-package dracula-theme :ensure t)
+
+;; terminus is the best font FIGHT ME!!!
+(add-to-list 'default-frame-alist '(font . "Terminus"))
+;; (set-face-attribute 'default nil :font "Unifont Medium")
+;; (set-default-font "Unifont Medium" nil t)
 
 ;; transpose-windows
 (use-package transpose-frame :ensure t)

@@ -14,7 +14,7 @@ hname=$(echo $HOSTNAME | sed -e 's/.home//g' | sed -e 's/.local//g')
 #fi
 
 # base keys
-# $BIN/keychain $HOME/.ssh/id_${hname}_${USER}
+$BIN/keychain $HOME/.ssh/id_${hname}_${USER}
 #$BIN/keychain $HOME/.ssh/id_${hname}_stncl
 
 source $HOME/.keychain/${HOSTNAME}-sh

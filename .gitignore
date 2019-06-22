@@ -2,3 +2,4 @@
 /.blackbox/pubring.kbx~
 /.blackbox/secring.gpg
 /symlinks/offlineimaprc
+/emacs/program/email-cfg.el

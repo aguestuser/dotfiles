@@ -1,1 +1,2 @@
+emacs/program/email-cfg.el
 symlinks/offlineimaprc

@@ -193,4 +193,23 @@ exec --no-startup-id blueman-applet
 
 # lock screen
 bindsym --release $mod+Escape exec --no-startup-id slock
+# firefox
 bindsym $mod+I exec firefox
+# notification daemon (left unused in preference for xfce4 notifications daemon)
+# exec --no-startup-id dunst
+
+###############
+# navigation  #
+###############
+
+bindsym $mod+Ctrl+l move workspace to output up
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+k move workspace to output down
+bindsym $mod+Ctrl+Down move workspace to output down
+
+###################### 
+# brightness control #
+###################### 
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5

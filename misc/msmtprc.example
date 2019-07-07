@@ -1,0 +1,23 @@
+account foo
+host smtp.example.com
+port 587
+protocol smtp
+auth on
+from foo@example.com
+user foo@example.com
+password <SOME_GREAT_PASSWORD>
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account bar
+host smtp.exmaple.com
+port 587
+protocol smtp
+auth on
+from foo@example.com
+user foo@example.com
+password <SOME_GREAT_PASSWORD>
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt

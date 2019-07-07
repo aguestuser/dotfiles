@@ -1,0 +1,50 @@
+[general]
+accounts = foo,bar
+maxsyncaccounts = 2
+
+#######
+# foo #
+#######
+
+[Account foo]
+localrepository = foo-local
+remoterepository = foo-remote
+# use tor
+proxy = SOCKS5:127.0.0.1:9150
+
+[Repository foo-local]
+type = Maildir
+localfolders = ~/Maildir/foo
+
+[Repository foo-remote]
+type = IMAP
+remotehost = imap.example.com
+remoteuser = foo@example.com
+remotepass = 3Tt_knd(F9a`9)?Z0r,u]J{),oe}b::H
+maxconnections = 1
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+
+#######
+# bar #
+#######
+
+[Account bar]
+localrepository = bar-local
+remoterepository = bar-remote
+# use tor
+proxy = SOCKS5:127.0.0.1:9150
+
+[Repository bar-local]
+type = Maildir
+localfolders = ~/Maildir/bar
+
+[Repository bar-remote]
+type = IMAP
+remotehost = imap.example.com
+remoteuser = bar@example.com
+remotepass = V5[y*-}vBWrZD9@d
+maxconnections = 1
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+

@@ -1,2 +1,3 @@
-emacs/program/email-cfg.el
-symlinks/offlineimaprc
+emacs/program/email-accounts.el
+misc/msmtprc
+misc/offlineimaprc

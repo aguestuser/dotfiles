@@ -10,7 +10,7 @@ alias clip="xclip -sel 'clipboard'"
 alias untar="tar xvzf"
 alias timezone-change="sudo dpkg-reconfigure tzdata"
 alias chrome-signed-out="google-chrome %U --password-store=basic"
-
+alias logout="i3-msg exit"
 
 # tor browser shortcut
 tor-browser-up(){

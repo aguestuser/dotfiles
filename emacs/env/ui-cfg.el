@@ -7,6 +7,7 @@
 
 ;; terminus is the best font FIGHT ME!!!
 (add-to-list 'default-frame-alist '(font . "Terminus"))
+(set-face-attribute 'default nil :height 160)
 ;; (set-face-attribute 'default nil :font "Unifont Medium")
 ;; (set-default-font "Unifont Medium" nil t)
 

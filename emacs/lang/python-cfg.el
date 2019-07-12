@@ -22,13 +22,16 @@
 ;;  we  defer to configs offered in lsp-cfg.el, with the following prereqs:
 ;;  pip3 install jedi python-language-server[all]  pyls-mypy
 
+(use-package highlight-indentation :ensure t)
+(use-package python-pytest :ensure t)
+
 (use-package python-mode
   :ensure t
   :init (progn
-            ;; (setq python-shell-interpreter "python3")
-            ;; (setq python-shell-interpreter-args "-i")
-            (setq python-shell-interpreter "ipython3" python-shell-interpreter-args "--simple-prompt -i")
-            (add-hook 'python-mode-hook (highlight-indentation-mode 1))))
+          ;; (setq python-shell-interpreter "python3")
+          ;; (setq python-shell-interpreter-args "-i")
+          (setq python-shell-interpreter "ipython3" python-shell-interpreter-args "--simple-prompt -i")
+          (add-hook 'python-mode-hook 'highlight-indentation-mode)))
 
 
 ;;;;;;;;;;;;;;;

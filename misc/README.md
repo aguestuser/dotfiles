@@ -1,13 +1,5 @@
 # miscelaneous configs for vendored apps
 
-## tor
-
-- install from tarball: https://www.torproject.org/download/alpha/
-
-```shell
-ln -s /opt/tor-browser_en-US/Browser/start-tor-browser /usr/local/bin/tor-browser
-```
-
 ## firefox
 
 - install from tarball: https://www.mozilla.org/en-US/firefox/channel/desktop/
@@ -16,7 +8,15 @@ ln -s /opt/tor-browser_en-US/Browser/start-tor-browser /usr/local/bin/tor-browse
 ln -s /opt/firefox-nightly/firefox /usr/local/bin/firefox
 ```
 
-## intellij
+## tor
+
+- install from tarball: https://www.torproject.org/download/alpha/
+
+```shell
+ln -s /opt/tor-browser_en-US/Browser/start-tor-browser /usr/local/bin/tor-browser
+```
+
+### intellij
 
 - tarball: https://www.jetbrains.com/idea/download/index.html#section=linux
 
@@ -24,14 +24,36 @@ ln -s /opt/firefox-nightly/firefox /usr/local/bin/firefox
 ln -s /opt/idea-IU-<TAB COMPLETE>/bin/idea.sh /usr/local/bin/intellij
 ```
 
+### webstorm
+
+```shell
+ln -s /opt/WebStorm-<TAB COMPLETE>/bin/webstorm.sh /usr/local/bin/webstorm
+```
+
+### android studio
+
+- tarball: https://developer.android.com/studio
+
+```shell
+ln -s /opt/android-studio/bin/studio.sh /usr/local/bin/android-studio
+```
+
 ## riseup-vpn
 
 ```shell
 sudo apt install snap
-snap install --classic riseup-vpn
+sudo snap install --classic riseup-vpn
 sudo ln -s ~/-/dotfiles/misc/start-riseup-vpn /usr/local/bin/riseup-vpn
 ```
 
+## gpg keyservers
+
+as per: https://dkg.fifthhorseman.net/blog/openpgp-certificate-flooding.html#use-abuse-resistant-keystores-to-refresh-certificates
+
+``` shell
+ln -s ~/-/dotfiles/misc/gpgdirmgr.conf ~/.gnupg/dirmngr.conf
+rm ~/.gnupg/gpg.conf
+```
 
 ## email (mu4e + msmtp)
 

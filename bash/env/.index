@@ -13,6 +13,7 @@ source ~/-/dotfiles/bash/env/keybindings
 source ~/-/dotfiles/bash/env/backup
 source ~/-/dotfiles/bash/env/bash-completion
 source ~/-/dotfiles/bash/env/docker
+source ~/-/dotfiles/bash/env/gcloud
 source ~/-/dotfiles/bash/env/git
 source ~/-/dotfiles/bash/env/keys
 source ~/-/dotfiles/bash/env/screen

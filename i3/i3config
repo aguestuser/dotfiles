@@ -186,6 +186,11 @@ exec --no-startup-id compton
 exec --no-startup-id xss-lock slock
 # bluetooth
 exec --no-startup-id blueman-applet
+# volume control (pulseaudio mixer)
+exec --no-startup-id pnmixer
+# vpn
+exec --no-startup-id riseup-vpn
+
 
 ##################
 # app launchers  #

@@ -9,7 +9,7 @@
 ;; - https://github.com/FrancisMurillo/.emacs.d#mu4e
 
 ;; dependencies:
-;; - sudo apt install offlineimap
+;; - sudo apt install offlineimap msmtp libgmime-3.0-dev libxapian-dev guile-2.0-dev html2text xdg-utils libwebkitgtk-3.0-dev python3-html2text
 ;; - mu43 from source: https://www.djcbsoftware.nl/code/mu/mu4e/Installation.html
 
 ;; necessary config files (see ../../misc/):

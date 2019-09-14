@@ -1,0 +1,85 @@
+export WAVE_PATH=${HOME}/-/wave/code
+
+export ALICE_NAME="Alice Agent"
+export ALICE_EMAIL="alice@wave.com"
+export ALICE_MOBILE=+221701111111
+export ALICE_PIN=1234
+export ALICE_QR=https://qr.wave.com/0123456789ab
+
+export BOB_NAME="Bob Buyer"
+export BOB_EMAIL="bob@wave.com"
+export BOB_MOBILE=+221702222222
+export BOB_PIN=1234
+export BOB_QR=https://qr.wave.com/ba9876543210
+
+export CASSIE_NAME="Cassie Customer"
+export CASSIE_EMAIL="cassie@wave.com"
+export CASSIE_MOBILE=+221703333333
+export CASSIE_PIN=1234
+export CASSIE_QR=https://qr.wave.com/wkHglIC51i8R
+
+export DOUG_NAME="Doug Deadbeat"
+export DOUG_EMAIL="doug@wave.com"
+export DOUG_MOBILE=+221704444444
+export DOUG_PIN=1234
+
+function w.rl(){
+  $WAVE_PATH/monorepo/money-srv/bin/runin local "$@"
+}
+
+function w.tool(){
+  w.rl tool "$@"
+}
+
+function w.sms(){
+  w.tool sn sms "$@"
+}
+
+function w.wdcode(){
+  w.tool sn wdcode "$@"
+}
+
+function w.hello(){
+  curl localhost:5000
+}
+
+function w.dev(){
+  docker-compose up -d local
+}
+
+function w.down(){
+  docker-compose down
+}
+
+function w.pause(){
+  docker-compose pause
+}
+
+function w.logs(){
+  docker-compose logs -f
+}
+
+w.seed() {
+  pushd `pwd` > /dev/null
+  cd $WAVE_PATH/monorepo/money-srv
+
+  echo "--- seeding db..."
+  w.tool sn create_user "$ALICE_NAME" "$ALICE_MOBILE" "$ALICE_EMAIL" 1234 \
+    && w.tool sn create_agent "$ALICE_MOBILE" "$ALICE_NAME" SN Dakar Market \
+    && w.tool sn register_qr_code "$ALICE_QR" \
+    && w.tool sn create_user "$BOB_NAME" "$BOB_MOBILE" "$BOB_EMAIL" 1234 \
+    && w.tool sn create_agent "$BOB_MOBILE" "$BOB_NAME" SN Dakar Market \
+    && w.tool sn register_qr_code "$BOB_QR" \
+    && w.tool sn create_user "$CASSIE_NAME" "$CASSIE_MOBILE" "$CASSIE_EMAIL" 1234 \
+    && w.tool sn register_qr_code "$CASSIE_QR"
+  echo "--- ...db seeded!"
+
+  echo "--- DONE!"
+  popd
+}
+
+# garbage collect the exited tool containers
+w.cleanup-docker() { 
+  [[ $(docker ps -a -q -f 'status=exited' | wc -l) -gt 0 ]] \
+   && docker rm $(docker ps -a -q -f 'status=exited') 
+}

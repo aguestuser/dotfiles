@@ -19,9 +19,12 @@
 
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
+(require 'org-mu4e)
 
 (use-package mu4e
   :config
+
+  (global-set-key (kbd "C-C C-3") 'mu4e)
 
   (setq
    ;; use mu4e as our mail user agen
@@ -69,4 +72,18 @@
 
   ;; Use the correct account context when sending mail based on the from header.
   (setq message-sendmail-envelope-from 'header)
-  (add-hook 'message-send-mail-hook 'choose-msmtp-account))
+  (add-hook 'message-send-mail-hook 'choose-msmtp-account)
+
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;; org-mode plugin ;;
+  ;;;;;;;;;;;;;;;;;;;;;
+  
+  ;;store link to message if in header view, not to header query
+  (setq org-mu4e-link-query-in-headers-mode nil)
+  ;; hitting C-c c t generates a todo item that contains a link to the email you are currently viewing.
+  (global-set-key (kbd "C-C c") 'org-capture)
+  (setq org-capture-templates
+        '(("t" "todo" entry (file+headline "~/-/notes/todo.org" "Tasks")
+           "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
+  )
+

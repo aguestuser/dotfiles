@@ -38,6 +38,16 @@ ln -s /opt/WebStorm-<TAB COMPLETE>/bin/webstorm.sh /usr/local/bin/webstorm
 ln -s /opt/android-studio/bin/studio.sh /usr/local/bin/android-studio
 ```
 
+### genymotion
+
+https://docs.genymotion.com/latest/Content/01_Get_Started/Installation.htm
+
+```shell
+sudo ln -s /opt/genymobile/genymotion/genymotion /usr/local/bin/genymotion
+sudo ln -s /opt/genymobile/genymotion/genymotion-shell /usr/local/bin/gmshell
+sudo ln -s /opt/genymobile/genymotion/gmtool /usr/local/bin/gmtool
+```
+
 ## riseup-vpn
 
 ```shell

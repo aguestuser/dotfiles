@@ -1,6 +1,8 @@
 if [ ${OS} == 'linux' ]
 then
   export JAVA_HOME=/usr/lib/jvm/default-java
+  # export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_221
+  export ANDROID_JAVA_HOME=/opt/android-studio/jre
 else
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/default-java
 fi

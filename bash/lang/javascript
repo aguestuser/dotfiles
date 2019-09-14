@@ -1,12 +1,13 @@
 # set nvm home dir
-if [ ${OS} == 'linux' ]; then
-  export NVM_DIR=${HOME}/.nvm
-else
-  export NVM_DIR="/Users/aguestuser/.nvm"
-  source $(brew --prefix nvm)/nvm.sh
-fi  
+# if [ ${OS} == 'linux' ]; then
+#   export NVM_DIR=${HOME}/.nvm
+# else
+#   export NVM_DIR="/Users/aguestuser/.nvm"
+#   source $(brew --prefix nvm)/nvm.sh
+# fi  
 
 # load nvm & nvm bash completion
+export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

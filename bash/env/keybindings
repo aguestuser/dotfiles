@@ -3,4 +3,5 @@
 if [ ${OS} == 'linux' ]
 then
    setxkbmap -option ctrl:nocaps
+   setxkbmap -option compose:ralt
 fi

@@ -8,8 +8,10 @@
 ;; terminus is the best font FIGHT ME!!!
 (add-to-list 'default-frame-alist '(font . "Terminus"))
 (set-face-attribute 'default nil :height 160)
-;; (set-face-attribute 'default nil :font "Unifont Medium")
-;; (set-default-font "Unifont Medium" nil t)
+
+;; NOTE: we currently have to call this after markdown mode is loaded else it errors
+;; (set-face-attribute 'markdown-code-face nil :font "Terminus" :height 160)
+
 
 ;; transpose-windows
 (use-package transpose-frame :ensure t)

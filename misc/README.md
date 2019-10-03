@@ -48,6 +48,11 @@ sudo ln -s /opt/genymobile/genymotion/genymotion-shell /usr/local/bin/gmshell
 sudo ln -s /opt/genymobile/genymotion/gmtool /usr/local/bin/gmtool
 ```
 
+### default webcam
+
+if you have problems with new thinkpads with 2 webcams:
+https://askubuntu.com/questions/1119743/how-do-i-change-the-default-webcam/1119832
+
 ## riseup-vpn
 
 ```shell

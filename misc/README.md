@@ -30,6 +30,13 @@ ln -s /opt/idea-IU-<TAB COMPLETE>/bin/idea.sh /usr/local/bin/intellij
 ln -s /opt/WebStorm-<TAB COMPLETE>/bin/webstorm.sh /usr/local/bin/webstorm
 ```
 
+### pycharm
+
+``` shell
+ln -s /opt/pycharm-<TAB COMPLETE>/bin/pycharm.sh* /usr/local/bin/pycharm
+sudo ln -s /home/aguestuser/.local/bin/black /usr/local/bin/black
+```
+
 ### android studio
 
 - tarball: https://developer.android.com/studio

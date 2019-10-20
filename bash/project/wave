@@ -6,13 +6,13 @@ export ALICE_NAME="Alice Agent"
 export ALICE_EMAIL="alice@wave.com"
 export ALICE_MOBILE=+221701111111
 export ALICE_PIN=1234
-export ALICE_QR=https://qr.wave.com/0123456789ab
+export ALICE_QR=https://qr.wave.com/t0123456789ab
 
 export BOB_NAME="Bob Buyer"
 export BOB_EMAIL="bob@wave.com"
 export BOB_MOBILE=+221702222222
 export BOB_PIN=1234
-export BOB_QR=https://qr.wave.com/ba9876543210
+export BOB_QR=https://qr.wave.com/tba9876543210
 
 export CASSIE_NAME="Cassie Customer"
 export CASSIE_EMAIL="cassie@wave.com"
@@ -29,12 +29,24 @@ function w.rl(){
   $WAVE_PATH/monorepo/money-srv/bin/runin local "$@"
 }
 
+function wp.r(){
+  $WAVE_PATH/monorepo/money-srv/bin/runin ngmaster "$@"
+}
+
 function w.tool(){
   w.rl tool "$@"
 }
 
+function wp.tool(){
+  wp.r tool "$@"
+}
+
 function w.sms(){
   w.tool sn sms "$@"
+}
+
+function wp.sms(){
+  wp.r tool sn sms "$@"
 }
 
 function w.wdcode(){

@@ -2,7 +2,7 @@
 local="~/-"
 remote="serioustown:~/-"
 
-local_opt=="/opt"
+local_opt="/opt"
 remote_opt="serioustown:/opt"
 
 # files to exclude

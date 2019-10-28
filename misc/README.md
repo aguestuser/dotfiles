@@ -34,7 +34,13 @@ ln -s /opt/WebStorm-<TAB COMPLETE>/bin/webstorm.sh /usr/local/bin/webstorm
 
 ``` shell
 ln -s /opt/pycharm-<TAB COMPLETE>/bin/pycharm.sh* /usr/local/bin/pycharm
-sudo ln -s /home/aguestuser/.local/bin/black /usr/local/bin/black
+sudo ln -s /usr/bin/black /usr/local/bin/black
+```
+
+### mypy
+
+``` shell
+pip install --upgrade mypy
 ```
 
 ### android studio

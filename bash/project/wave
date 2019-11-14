@@ -1,3 +1,6 @@
+# to spy on sms codes
+# select code, mobile from sms_tokens order by when_created desc limit 3 \watch 2
+
 export WAVE_SLACK_STATUS_BOT_TOKEN=xoxp-201679321303-678975297859-757743671026-471d13b03a1bccf9e192c1cf6b8a65cc
 
 export WAVE_PATH=${HOME}/-/wave/code

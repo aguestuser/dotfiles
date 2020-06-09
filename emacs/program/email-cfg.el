@@ -84,6 +84,6 @@
   (global-set-key (kbd "C-C c") 'org-capture)
   (setq org-capture-templates
         '(("t" "todo" entry (file+headline "~/-/notes/todo.org" "Tasks")
-           "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
+           "* TODO %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
   )
 

@@ -3,6 +3,8 @@
 
 export WAVE_SLACK_STATUS_BOT_TOKEN=xoxp-201679321303-678975297859-757743671026-471d13b03a1bccf9e192c1cf6b8a65cc
 
+export SENDWAVE_HOST=http://austin.sendwave.ngrok.io
+
 export WAVE_PATH=${HOME}/-/wave/code
 
 export ALICE_NAME="Alice Agent"
@@ -32,7 +34,7 @@ function w.rl(){
   $WAVE_PATH/monorepo/money-srv/bin/runin local "$@"
 }
 
-function wp.r(){
+function w.rp(){
   $WAVE_PATH/monorepo/money-srv/bin/runin ngmaster "$@"
 }
 
@@ -41,7 +43,7 @@ function w.tool(){
 }
 
 function wp.tool(){
-  wp.r tool "$@"
+  w.rp tool "$@"
 }
 
 function w.sms(){
@@ -49,7 +51,7 @@ function w.sms(){
 }
 
 function wp.sms(){
-  wp.r tool sn sms "$@"
+  w.rp tool sn sms "$@"
 }
 
 function w.wdcode(){
@@ -99,4 +101,30 @@ w.seed() {
 w.cleanup-docker() { 
   [[ $(docker ps -a -q -f 'status=exited' | wc -l) -gt 0 ]] \
    && docker rm $(docker ps -a -q -f 'status=exited') 
+}
+
+
+w.tokens() {
+  w.rl sql -x <<"EOF"
+\C `clear`
+
+/*
+The above tells psql to clear your terminal before printing out the
+results of each query
+*/
+
+select to_char(when_created, 'HH24:MI:SS') as created
+     , to_char(when_used, 'HH24:MI:SS') as used
+     , code
+  from sms_tokens
+ order by when_created desc
+ limit 3
+
+ \watch 2
+
+;
+
+/* '\watch 2' tells psql to run this query every 2 seconds */
+
+EOF
 }

@@ -31,3 +31,8 @@ if [ ${OS} == 'linux' ]; then
   function emulator { cd "$(dirname "$(which emulator)")" && ./emulator "$@"; }
   export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 fi
+
+uiautomator() {
+  export SDK_PATH=/home/aguestuser/Android/Sdk/ 
+  java -Xmx1600M -Dcom.android.uiautomator.bindir="$SDK_PATH/tools" -cp "$SDK_PATH/tools/lib/x86_64/swt.jar":"$SDK_PATH/tools/lib/*" com.android.uiautomator.UiAutomatorViewer
+}

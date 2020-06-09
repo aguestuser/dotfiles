@@ -6,5 +6,5 @@ source ~/-/dotfiles/bash/project/whereat
 source ~/-/dotfiles/bash/project/riseup
 source ~/-/dotfiles/bash/project/ls
 source ~/-/dotfiles/bash/project/wave
-
+source ~/-/dotfiles/bash/project/signalboost
 

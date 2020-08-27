@@ -13,6 +13,16 @@
     ("7da94b2317287817194c4c932086fad5f295e20a861b4321fef69db72842bc1a" "a4df5d4a4c343b2712a8ed16bc1488807cd71b25e3108e648d4a26b02bc990b3" default)))
  '(fci-rule-color "#383838")
  '(flycheck-javascript-flow-args nil)
+ '(mml-secure-key-preferences
+   (quote
+    ((OpenPGP
+      (sign)
+      (encrypt
+       ("team-friendo@riseup.net" "2EEAFF8BD61D568E2A3168AAE726A156229F56F1")
+       ("austing@riseup.net" "5E487DE26BD9EBAFBD58C3695C71C8B497B47404")))
+     (CMS
+      (sign)
+      (encrypt)))))
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))

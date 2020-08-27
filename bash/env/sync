@@ -1,9 +1,11 @@
 # src & dst
 local="~/-"
-remote="serioustown:~/-"
+#remote="serioustown:~/-"
+remote="serioustown-local:~/-"
 
 local_opt="/opt"
-remote_opt="serioustown:/opt"
+#remote_opt="serioustown:/opt"
+remote_opt="serioustown-local:/opt"
 
 # files to exclude
 

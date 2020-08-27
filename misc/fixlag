@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# resets bluethooth headset connectioun to fix lag
+# setup: ln -s ~/-/dotfiles/misc/btlag /usr/local/bin/btlag
+# usage: fixlag
+
+card=alsa_card.usb-Sennheiser_Sennheiser_GSA_70-00
+pactl set-card-profile $card output:analog-mono+input:analog-mono
+pactl set-card-profile $card off
+pactl set-card-profile $card output:analog-mono+input:analog-mono

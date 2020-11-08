@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# setup:
+# sudo ln -s /home/aguestuser/-/dotfiles/bash/env/_sync /usr/local/bin/_sync 
+
+# usage:
+# _sync
+
+# in /etc/crontab:
+# 30   5  *  *  *   aguestuser /usr/bin/_sync > /tmp/sync.log 2>&1
+
+local="/home/aguestuser/-"
+remote="serioustown-local:/home/aguestuser/-"
+
+cd ${local}
+
+time rsync -azP \
+  --delete \
+  --exclude={'code/go','*/node_modules','*/build/*'} \
+  ${local}/ ${remote}
+

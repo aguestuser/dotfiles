@@ -8,6 +8,8 @@ local_opt="/opt"
 remote_opt="serioustown-local:/opt"
 
 # files to exclude
+excludes="/home/aguestuser/-/code/go/"
+
 
 # `-a`: syncs recursively, preserves symlinks, special/device files, mod times, group, owner, & permissions.
 # `-z`: performs compression
@@ -19,9 +21,10 @@ remote_opt="serioustown-local:/opt"
 # PUSH #
 ########
 
-alias sync-push="time sync-push-home && sync-push-opt"
-alias sync-push-home="time rsync -azP --delete ${local}/ ${remote}"
+alias sync-push="sync-push-home"
+alias sync-push-home="time rsync --exclude /home/aguestuser/-/code/go/ -azP --delete ${local}/ ${remote}"
 alias sync-push-opt="time rsync -azP --delete ${local_opt}/ ${remote_opt}"
+alias sync-push-all="time sync-push-home && sync-push-opt"
 
 alias sync-push-preview="time rsync -anv --delete ${local}/ ${remote}"
 alias sync-push-safe="time rsync -azP --delete ${local}/ ${remote}"
@@ -31,9 +34,10 @@ alias sync-push-safe-preview="time rsync -anv  ${local}/ ${remote}"
 # PULL #
 ########
 
-alias sync-pull="time rsync sync-pull home && sunc-pull-opt"
-alias sync-pull-home="time rsync -azP --delete  ${remote}/ ${local}"
+alias sync-pull="time rsync sync-pull-home"
+alias sync-pull-home="time rsync -azP --delete  ${remote}/ ${local} --exclude ${excludes}"
 alias sync-pull-opt="time rsync -azP  --delete ${remote_opt}/ ${local_opt}"
+alias sync-pull-all="time rsync sync-pull-home && sunc-pull-opt"
 
 alias sync-pull-preview="time rsync -anv --delete   ${remote}/ ${local}"
 alias sync-pull-safe="time rsync -azP  ${remote}/ ${local}"

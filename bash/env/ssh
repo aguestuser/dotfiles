@@ -7,15 +7,8 @@
 
 hname=$(echo $HOSTNAME | sed -e 's/.home//g' | sed -e 's/.local//g')
 
-# machine-specific keys
-#if [ $hname == 'tikva' ]; then
-   #$BIN/keychain $HOME/.ssh/id_whereat_${hname}
-   #$BIN/keychain $HOME/.ssh/id_bandicoot_${hname}
-#fi
-
 # base keys
 $BIN/keychain $HOME/.ssh/id_${hname}_${USER}
-$BIN/keychain $HOME/.ssh/google_compute_engine
 #$BIN/keychain $HOME/.ssh/id_${hname}_stncl
 
 source $HOME/.keychain/${HOSTNAME}-sh

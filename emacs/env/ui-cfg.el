@@ -5,14 +5,6 @@
 ;; dracula theme is the best theme!!!!!!!!!!!!!!
 (use-package dracula-theme :ensure t)
 
-;; terminus is the best font FIGHT ME!!!
-(add-to-list 'default-frame-alist '(font . "Terminus"))
-(set-face-attribute 'default nil :height 160)
-
-;; NOTE: we currently have to call this after markdown mode is loaded else it errors
-;; (set-face-attribute 'markdown-code-face nil :font "Terminus" :height 160)
-
-
 ;; transpose-windows
 (use-package transpose-frame :ensure t)
 (require 'transpose-frame)

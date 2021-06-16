@@ -22,32 +22,33 @@
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
-(use-package company
-  :ensure t
-  :diminish company-mode
-  :init
-  (setf company-backends '((company-files
-                            company-keywords
-                            company-capf
-                            company-yasnippet)
-                           (company-abbrev company-dabbrev)))
-  (setf company-idle-delay 0.5)
-  (setf company-tooltip-limit 10)
-  (setf company-minimum-prefix-length 1)
-  (setf company-echo-delay 0)
-  (setf company-auto-complete nil)
-  (add-hook 'after-init-hook #'global-company-mode))
+;; BROKEN -----v
+;; (use-package company
+;;   :ensure t
+;;   :diminish company-mode
+;;   :init
+;;   (setf company-backends '((company-files
+;;                             company-keywords
+;;                             company-capf
+;;                             company-yasnippet)
+;;                            (company-abbrev company-dabbrev)))
+;;   (setf company-idle-delay 0.5)
+;;   (setf company-tooltip-limit 10)
+;;   (setf company-minimum-prefix-length 1)
+;;   (setf company-echo-delay 0)
+;;   (setf company-auto-complete nil)
+;;   (add-hook 'after-init-hook #'global-company-mode))
 
-(use-package company-lsp
-  :ensure t
-  :init
-  (push 'company-lsp company-backends)
-  (setf company-lsp-async t))
+;; (use-package company-lsp
+;;   :ensure t
+;;   :init
+;;   (push 'company-lsp company-backends)
+;;   (setf company-lsp-async t))
 
-(use-package company-quickhelp
-  :ensure t
-  :after (company)
-  :config (company-quickhelp-mode 1))
+;; (use-package company-quickhelp
+;;   :ensure t
+;;   :after (company)
+;;   :config (company-quickhelp-mode 1))
 
 ;; also see: https://github.com/emacs-lsp/lsp-mode#installation
 

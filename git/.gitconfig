@@ -2,5 +2,5 @@
 	name = aguestuser
 	email = aguestuser@riseup.net
 	signingkey = 97B47404
-[commit]
-	gpgsign = true
+
+	

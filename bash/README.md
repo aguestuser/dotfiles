@@ -5,7 +5,7 @@
 * assumes being included in `~/.bashrc` with:
 
 ```bash
-source ~/dotfiles/bash/.index
+source ~/-/dotfiles/bash/.index
 ```
 
 * assumes being sources from `~/.bash_profile` as such:

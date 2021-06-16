@@ -38,7 +38,7 @@
 ;; nose-mode ;;
 ;;;;;;;;;;;;;;;
 
-(use-package nose-mode :ensure t)
+;; (use-package nose-mode :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Jedi (code completion, etc.) ;;
@@ -73,7 +73,8 @@
           (require 'ein)
           ;; (require 'ein-loaddefs)
           (require 'ein-notebook)
-          (require 'ein-subpackages))
+          ;; (require 'ein-subpackages)
+)
   :config (progn
             ;; use `url-retrieve` instead of `curl`
             ;; as per: https://github.com/tkf/emacs-ipython-notebook/issues/130

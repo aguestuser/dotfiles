@@ -10,7 +10,7 @@
 (require 'transpose-frame)
 
 ;; line numbering
-(global-linum-mode)
+;; (global-linum-mode)
 (column-number-mode)
 (if (fboundp 'fringe-mode)
     (fringe-mode 4))

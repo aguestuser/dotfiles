@@ -30,5 +30,5 @@ $ ln -s ~/-/dotfiles/emacs personal
 $ echo ";;;;;;;;;;;;;;;;;;;;;;;;;;;" >> ~/.emacs.d/init.el && \
   echo ";;;load dotfiles configs ;;" >> ~/.emacs.d/init.el && \
   echo ";;;;;;;;;;;;;;;;;;;;;;;;;;;" >> ~/.emacs.d/init.el && \
-  echo "(load "~/.emacs.d/personal/config.el")" >> ~/.emacs.d/init.el
+  echo "(load \"~/.emacs.d/personal/config.el\")" >> ~/.emacs.d/init.el
 ```

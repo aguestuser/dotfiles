@@ -73,3 +73,4 @@ set_title(){
    echo -en "\033]0;$1\a"
 }
 
+eval `dircolors /home/aguestuser/.dir_colors/dircolors`

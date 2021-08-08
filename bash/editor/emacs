@@ -5,10 +5,10 @@ alias emacs="org.gnu.emacs"
 alias em="emacs"
 
 # client aliases
-alias emacsclient="flatpak run --command=emacsclient org.gnu.emacs --create-frame"
+alias emacsclient="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
+export EDITOR="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
 alias ec="emacsclient -n"
 alias ecn="emacsclient -c -n"
-export EDITOR="flatpak run --command=emacsclient org.gnu.emacs --create-frame"
 
 # alias to daemon (shouldn't be necessary if we always run server on startup!)
 alias ed="flatpak run org.gnu.emacs --daemon"
@@ -38,3 +38,4 @@ alias ed="flatpak run org.gnu.emacs --daemon"
 # obsolete (pre-flatpak) versions of above
 #############################################
 # export EDITOR="emacsclient"
+# alias ed="emacs --daemon"

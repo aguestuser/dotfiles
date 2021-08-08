@@ -2,6 +2,10 @@
 ;; editing ;;
 ;;;;;;;;;;;;;
 
+;; snippets
+(use-package yasnippet :ensure t)
+(use-package yasnippet-snippets :ensure t)
+
 ;; pair completion
 (electric-pair-mode 1)
 (smartparens-global-mode)

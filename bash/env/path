@@ -2,6 +2,9 @@
 
 if [ ${OS} == 'linux' ]
 then
+  # to access flatpak-installed commands, as per:
+  # as per: https://www.tomica.net/blog/2019/04/launching-flatpak-applications-from-command-line/
+  export PATH="$PATH:/var/lib/flatpak/exports/bin"
   export HOME=/home/${USER}
   export PATH=$PATH:$HOME/.local/bin
   export PATH=$PATH:/usr/sbin

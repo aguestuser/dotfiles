@@ -1,10 +1,19 @@
 #emacs
 
+# alias to flatpak command:
+alias emacs="org.gnu.emacs"
 alias em="emacs"
-alias ecn="emacsclient -c -n"
+
+# client aliases
+alias emacsclient="flatpak run --command=emacsclient org.gnu.emacs --create-frame"
 alias ec="emacsclient -n"
-alias ed="emacs --daemon"
+alias ecn="emacsclient -c -n"
 export EDITOR="emacsclient"
 
+# alias to daemon (shouldn't be necessary if we always run server on startup!)
+alias ed="flatpak run org.gnu.emacs --daemon"
 
-
+#############################################
+# obsolete (pre-flatpak) versions of above
+#############################################
+# alias ed="emacs --daemon"

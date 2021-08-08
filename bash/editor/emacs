@@ -8,12 +8,33 @@ alias em="emacs"
 alias emacsclient="flatpak run --command=emacsclient org.gnu.emacs --create-frame"
 alias ec="emacsclient -n"
 alias ecn="emacsclient -c -n"
-export EDITOR="emacsclient"
+export EDITOR="flatpak run --command=emacsclient org.gnu.emacs --create-frame"
 
 # alias to daemon (shouldn't be necessary if we always run server on startup!)
 alias ed="flatpak run org.gnu.emacs --daemon"
 
+###################################
+# NOTES ON PERMISSIONS IN FLATPAK: 
+# several sensitive directories are block-listed from the sandbox in which emacs runs inside of flatbak. 
+# 
+# to access them, you can visit the mounted versions in:
+#  /var/run/host/
+#
+# eg, to view 
+#  /usr/share/applications 
+# visit
+#  /var/run/host/usr/share/appplications
+#
+# block-listed directories:
+#   /lib, /lib32, /lib64, /bin, /sbin, /usr, /boot, /root, 
+#   /tmp, /etc, /app, /run, /proc, /sys, /dev, /var
+# 
+# to have access to any host system files at all, you will need to run the following override on install:
+#   flatpak override --filesystem=host org.gnu.emacs
+# to be able to use emacs to edit gopass secrets, you will need:
+#   sudo flatpak override --filesystem=/dev/shm org.gnu.emacs
+
 #############################################
 # obsolete (pre-flatpak) versions of above
 #############################################
-# alias ed="emacs --daemon"
+# export EDITOR="emacsclient"

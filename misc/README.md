@@ -95,3 +95,8 @@ ln -s ~/-/dotfiles/misc/offlineimaprc ~/.offlineimaprc
 cp ~/-/dotfiles/misc/msmtprc ~/.msmtprc
 sudo chmod 600 ~/.msmtprc
 ```
+
+## bluetooth headset
+- to pair (maybe): https://mastodon.ar.al/@aral/104196577501219997
+- to enable mic: https://askubuntu.com/questions/831331/failed-to-change-profile-to-headset-head-unit
+  - with repo stored in `/usr/src`

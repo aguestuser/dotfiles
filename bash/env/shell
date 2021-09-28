@@ -21,7 +21,8 @@ tor-browser-up(){
 }
 
 # firefox nightly shortcut & override for opening files
-alias firefox="/opt/firefox-nightly/firefox"
+# alias firefox="/opt/firefox-nightly/firefox"
+alias firefox="/usr/bin/firefox"
 
 # functions
 

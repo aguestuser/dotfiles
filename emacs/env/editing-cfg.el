@@ -19,6 +19,12 @@
 (fset 'indent-riffle [tab down])
 (define-key global-map "\C-z" 'indent-riffle)
 
+;; spell-checking
+(setq ispell-program-name "hunspell")
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist
+      '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+
 ;; code-folding
 ;; (hs-minor-mode t) ;;<- won't work by default in fundamental mode
 ;; (global-set-key (kbd "C-c <up>") 'hs-show-block)

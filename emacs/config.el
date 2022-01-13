@@ -46,9 +46,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/personal/program")
 
-;; (load "email-cfg.el")
-;; (load "magit-cfg.el")
+(load "email-redux-cfg.el")
 ;; (load "notmuch-cfg.el")
+;; (load "magit-cfg.el")
 (load "org-mode-cfg.el")
 
 

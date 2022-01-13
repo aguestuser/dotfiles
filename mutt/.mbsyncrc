@@ -1,0 +1,56 @@
+# .mbsyncrc
+# usage: ln -s ~/.mbsyncrc ~/-/dotfiles/.mbsyncrc
+# docs: https://isync.sourceforge.io/
+
+IMAPAccount aguestuser
+# Address to connect to
+Host 5gdvpfoh6kb2iqbizb37lzk2ddzrwa47m6rpdueg2m656fovmbhoptqd.onion
+Port 993
+User aguestuser@riseup.net
+PassCmd "gpg --no-tty --quiet --decrypt ~/.msmtp-aguestuser.gpg"
+# Use SSL
+AuthMechs PLAIN
+SSLType IMAPS
+SSLVersions TLSv1 TLSv1.1 TLSv1.2
+CertificateFile /home/aguestuser/.cert/riseuponion.pem
+
+IMAPStore aguestuser-remote
+Account aguestuser
+
+MaildirStore aguestuser-local
+# The trailing "/" is important
+Path ~/.maildir/aguestuser/
+Inbox ~/.maildir/aguestuser/Inbox
+# as per: https://benswift.me/blog/2020/07/17/mbsync-v1-3-2-breaking-change/
+SubFolders Verbatim
+
+Channel aguestuser
+Master :aguestuser-remote:
+Slave :aguestuser-local:
+# Exclude certain things
+# Or include everything
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+
+
+
+# Channel work-inbox
+# Master :work-remote:
+# Slave :work-local:
+# Patterns "INBOX"
+
+# Channel work-sent
+# Master :work-remote:"[Gmail]/Sent Mail"
+# Slave :work-local:sent
+
+# Channel work-trash
+# Master :work-remote:"[Gmail]/Trash"
+# Slave :work-local:trash
+
+# Group work
+# Channel work-inbox
+# Channel work-sent
+# Channel work-trash

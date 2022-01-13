@@ -1,0 +1,92 @@
+# .muttrc
+# usage: ln -s ~/.muttrc ~/-/dotfiles/mutt/.muttrc
+
+#########
+# editor
+#########
+# set editor = $EDITOR
+# set pager = $PAGER
+
+###########
+# account
+###########
+
+set realname="Austin G."
+set use_from=yes
+set from=aguestuser@torproject.org
+set envelope_from=yes
+
+##########
+# folders
+##########
+
+set folder = "~/.maildir/aguestuser"
+set spoolfile = "~/.maildir/aguestuser/Inbox"
+set postponed = "~/.maildir/aguestuser/Drafts"
+set trash = "+/Trash"
+set record = ""
+
+##########
+# sending
+##########
+
+set sendmail="/usr/bin/msmtp"
+
+
+############
+# receiving
+############
+
+# press "shift G" to sync inbox
+macro index G "!torify mbsync -a aguestuser" "Fetch emails via mbsync"
+set move = no
+
+#######
+# pgp
+#######
+
+source ~/.gpg.rc
+
+# autocrypt yes
+
+set pgp_default_key = "aguestuser@riseup.net"
+set pgp_use_gpg_agent = "yes"
+
+set crypt_autosign = "yes"
+set crypt_opportunistic_encrypt = "yes"
+# set crypt_replysign = "yes"
+set crypt_replyencrypt = "yes"
+set crypt_replysignencrypted = "yes"
+set postpone_encrypt = "yes"
+
+##########
+# search 
+##########
+
+# (see: https://wiki.archlinux.org/title/Notmuch#Integrating_with_mutt)
+
+
+macro index <F8> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<shell-escape>notmuch-mutt -r --prompt search<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+"notmuch: search mail"
+
+macro index <F9> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuch-mutt -r thread<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+"notmuch: reconstruct thread"
+
+macro index <F6> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuch-mutt tag -- -inbox<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+"notmuch: remove message from inbox"
+
+# 'L' performs a notmuch query, showing only the results
+macro index L "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+# 'a' shows all messages again (supersedes default <alias> binding)
+macro index a "<limit>all\n" "show all messages (undo limit)"

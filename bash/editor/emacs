@@ -1,10 +1,13 @@
 #emacs
 
-alias em="emacs"
-alias ec="emacsclient -n"
-alias ecn="emacsclient -c -n"
+# alias emacsclient="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
+client="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
+#alias emacsclient=$client
+alias ec="$client -n"
+alias ecn="$client -c -n"
 
-export EDITOR="/usr/bin/emacsclient"
+export EDITOR=$client
+export PAGER=$client
 
 # ^-- NOTE: this only works if we already have a version of emacs running in server mode, which we accomplish by:
 # (1) running emacs on startup (via systemd and/or "Startup Applications" in GNOME)
@@ -35,19 +38,3 @@ export EDITOR="/usr/bin/emacsclient"
 #   sudo flatpak override --filesystem=/dev/shm org.gnu.emacs
 
 
-######################################################
-# SOME FLATPAK-related stuff we don't actually need!
-#####################################################
-
-# alias emacsclient="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
-# export EDITOR="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
-
-# alias to daemon (shouldn't be necessary if we always run server on startup!)
-# alias ed="flatpak run org.gnu.emacs --daemon"
-
-
-#############################################
-# obsolete (pre-flatpak) versions of above
-#############################################
-
-# alias ed="emacs --daemon"

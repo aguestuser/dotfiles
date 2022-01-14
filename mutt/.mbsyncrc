@@ -19,8 +19,8 @@ Account aguestuser
 
 MaildirStore aguestuser-local
 # The trailing "/" is important
-Path ~/.maildir/aguestuser/
-Inbox ~/.maildir/aguestuser/Inbox
+Path ~/-/.maildir/aguestuser/
+Inbox ~/-/.maildir/aguestuser/Inbox
 # as per: https://benswift.me/blog/2020/07/17/mbsync-v1-3-2-breaking-change/
 SubFolders Verbatim
 

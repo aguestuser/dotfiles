@@ -20,9 +20,9 @@ set envelope_from=yes
 # folders
 ##########
 
-set folder = "~/.maildir/aguestuser"
-set spoolfile = "~/.maildir/aguestuser/Inbox"
-set postponed = "~/.maildir/aguestuser/Drafts"
+set folder = "~/-/.maildir/aguestuser"
+set spoolfile = "~/-/.maildir/aguestuser/Inbox"
+set postponed = "~/-/.maildir/aguestuser/Drafts"
 set trash = "+/Trash"
 set record = ""
 

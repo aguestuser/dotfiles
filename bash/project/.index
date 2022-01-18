@@ -1,10 +1,4 @@
-# source ~/-/dotfiles/bash/project/uplevel
-# source ~/-/dotfiles/bash/project/sc
-#source ~/-/dotfiles/bash/project/affinity
-
-source ~/-/dotfiles/bash/project/whereat
 source ~/-/dotfiles/bash/project/riseup
 source ~/-/dotfiles/bash/project/ls
-source ~/-/dotfiles/bash/project/wave
 source ~/-/dotfiles/bash/project/signalboost
-
+source ~/-/dotfiles/bash/project/tor

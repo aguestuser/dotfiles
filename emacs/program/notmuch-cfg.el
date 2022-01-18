@@ -11,10 +11,6 @@
 ;; decrypt messages
 (setq notmuch-crypto-process-mime t)
 
-;; sign and encrypte messages by default
-(add-hook 'message-setup-hook 'mml-secure-message-encrypt-pgpmime)
-;;(add-hook 'message-setup-hook 'mml-secure-message-sign-pgpmime)
-
 
 ;; auto-complete w/ helm
 (setq notmuch-address-selection-function

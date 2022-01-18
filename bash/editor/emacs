@@ -1,40 +1,16 @@
 #emacs
 
-# alias emacsclient="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
-client="flatpak run --command=emacsclient --talk-name=org.freedesktop.Flatpak org.gnu.emacs --create-frame"
-#alias emacsclient=$client
-alias ec="$client -n"
-alias ecn="$client -c -n"
+alias es="emacs --daemon"
+alias ec="emacsclient"
+alias ecn="emacsclient -cn"
+alias ect="emacsclient -t"
 
-export EDITOR=$client
-export PAGER=$client
+export EDITOR="emacsclient -t"
+export PAGER="less"
 
-# ^-- NOTE: this only works if we already have a version of emacs running in server mode, which we accomplish by:
-# (1) running emacs on startup (via systemd and/or "Startup Applications" in GNOME)
-# (2) ensure that emacs always runs in server mode in init.el
-
-
-###################################
-# NOTES ON PERMISSIONS IN FLATPAK: 
-####################################
-
-# several sensitive directories are block-listed from the sandbox in which emacs runs inside of flatbak. 
-# 
-# to access them, you can visit the mounted versions in:
-#  /var/run/host/
+# NOTE: emacsclient only works if we already have a version of emacs running in
+# daemon/server mode, which we accomplish via startup job:
 #
-# eg, to view 
-#  /usr/share/applications 
-# visit
-#  /var/run/host/usr/share/appplications
-#
-# block-listed directories:
-#   /lib, /lib32, /lib64, /bin, /sbin, /usr, /boot, /root, 
-#   /tmp, /etc, /app, /run, /proc, /sys, /dev, /var
-# 
-# to have access to any host system files at all, you will need to run the following override on install:
-#   flatpak override --filesystem=host org.gnu.emacs
-# to be able to use emacs to edit gopass secrets, you will need:
-#   sudo flatpak override --filesystem=/dev/shm org.gnu.emacs
-
-
+# cp ~/-/dotfiles/bash/editor/emacs.service ~/.config/systemd/user/
+# systemctl --user daemon-reload
+# systemctl --user start emacs

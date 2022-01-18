@@ -1,10 +1,3 @@
-mutt
-============
-
-# dependencies
-- mutt
-- msmptp
-
 # docs
 - [mutt wiki](https://gitlab.com/muttmua/mutt/-/wikis/home)
 - [mutt conceptual overview](https://gitlab.com/muttmua/mutt/-/wikis/MailConcept)
@@ -72,10 +65,6 @@ sudo apt install notmuch-mutt
 
 add configs:
 
-``` shell
-
-```
-
 systemd sync job:
 
 ``` shell
@@ -87,7 +76,7 @@ Description=Mailbox synchronization service
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va
-ExecStartPost=/usr/bin/notmuch new
+# ExecStartPost=/usr/bin/notmuch new
 ```
 timer for sync job (runs every 5 min, starting 2 min after boot):
 

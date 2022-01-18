@@ -46,7 +46,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/personal/program")
 
-(load "email-redux-cfg.el")
+(load "mu4e.el")
 ;; (load "notmuch-cfg.el")
 ;; (load "magit-cfg.el")
 (load "org-mode-cfg.el")
@@ -57,4 +57,6 @@
 ;;;;;;;;;;;;
 
 ;; to allow emacsclient to connect to this session
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))

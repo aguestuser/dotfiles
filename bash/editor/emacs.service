@@ -1,0 +1,18 @@
+# ~/.config/systemd/user/emacs.service
+
+[Unit]
+Description=Emacs Daemon Service
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStartPost=/usr/bin/emacsclient -nc
+ExecStartPost=/usr/bin/emacsclient -nc
+ExecStop=killall emacs
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

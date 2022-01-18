@@ -1,0 +1,2 @@
+# fetch riseup cert every morning at 4:20am
+20 4  *  *  * aguestuser /usr/local/bin/fetch-riseup-cert > /tmp/fetch-riseup-cert.log 2>&1

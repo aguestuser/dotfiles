@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+##########
+# setup:
+##########
+# sudo ln -s /home/aguestuser/-/dotfiles/bash/env/backup-local /usr/local/bin/backup-local
+# cat ~/-/dotfiles/bash/env/backup-cronjob | sudo tee -a /etc/crontab
+
+#########
+# usage:
+#########g
+# backup
+
+local="/home/aguestuser/-"
+remote="serioustown-local:/home/aguestuser/-"
+
+cd ${local}
+
+echo ""
+echo "************************************************"
+echo "running backup at $(date)"
+echo "************************************************"
+echo ""
+
+time rsync -azP \
+  --delete \
+  --exclude={'code/go','*/node_modules','*/build/*','*/out/*'} \
+  ${local}/ ${remote}
+
+echo ""
+echo "************************************************"
+echo ""

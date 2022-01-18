@@ -1,0 +1,3 @@
+
+# backup laptop to serioustown every 3 hours
+# 0  */3  *  *  * aguestuser /usr/local/bin/backup-local > /tmp/sync.log 2>&1

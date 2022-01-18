@@ -4,3 +4,5 @@
 	signingkey = 97B47404
 
 	
+[commit]
+	gpgsign = true

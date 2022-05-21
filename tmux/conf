@@ -47,8 +47,8 @@ bind-key C-s command-prompt -p "host" "new-window -n %1 'ssh %1'"
 # Copy Mode
 # ------------------------
 
-# set scrollback history to 10000 (10k)
-set -g history-limit 10000
+# set scrollback history to 100000 (10k)
+set -g history-limit 100000
 
 # upward mouse scroll initiates copy-mode
 set-option -g mouse on
@@ -90,7 +90,7 @@ set-option -g status on                # turn the status bar on
 
 # visual notification of activity in other windows
 setw -g monitor-activity on
-set -g visual-activity on
+# set -g visual-activity on
 
 # set color for status bar
 set-option -g status-bg colour235 #base02
@@ -124,3 +124,16 @@ set-window-option -g window-status-current-attr bright
 # # ---------------------
 
 # # http://zanshin.net/2013/09/05/my-tmux-configuration/
+
+###########
+# powerline
+# as per: https://github.com/erikw/tmux-powerline
+#####################################################
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-justify "left"
+set-option -g status-left-length 60
+set-option -g status-right-length 90
+set-option -g status-left "#(/opt/tmux-powerline/powerline.sh left)"
+set-option -g status-right "#(/opt/tmux-powerline/powerline.sh right)"
+set-hook -g session-created 'run-shell "/opt/tmux-powerline/powerline.sh init"' # prettifies the window-status segments

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Fetching riseup cert at $(date)"
+echo "Fetching riseup cert at $(date), placing at ~/.cert/riseuponion.pem..."
 
 torify openssl s_client -connect 5gdvpfoh6kb2iqbizb37lzk2ddzrwa47m6rpdueg2m656fovmbhoptqd.onion:993 -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sed -ne '1,/-END CERTIFICATE-/p' > ~/.cert/riseuponion.pem
+
+cat ~/.cert/riseuponion.pem | openssl x509 -noout -fingerprint -sha256

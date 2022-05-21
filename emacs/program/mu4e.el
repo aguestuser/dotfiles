@@ -48,9 +48,12 @@
    ;;;;;;;;;;;;;;;;;;;;
 
    ;; retrieve mail w/ mbsync over tor (see ~/.mbsyrncrc for configs)
-   mu4e-get-mail-command "torify mbsync -aV"
-   ;; refetch every 5 min
-   mu4e-update-interval 300
+   ;;fetch email without verbose logging:
+   mu4e-get-mail-command "torify mbsync -a"
+   ;; fetch email (with verbose logging):
+   ;; mu4e-get-mail-command "torify mbsync -aV"
+   ;; refetch every 3 min
+   mu4e-update-interval 180
 
    ;; send mail with smtp mail
    ;; - for configs see: see `~/.msmtprc for configs',
@@ -111,18 +114,18 @@
    ;; aesthetics
    ;;;;;;;;;;;;;;;
    mu4e-use-fancy-chars t
-   mu4e-compose-signature (concat "/a/")
+   mu4e-compose-signature "/a/"
   ))
 
-(use-package mu4e-alert
-  :ensure t
-  :after mu4e
-  :init
-  (setq mu4e-alert-interesting-mail-query "flag:unread maildir:/aguestuser/Inbox ")
-  (mu4e-alert-enable-mode-line-display)
-  (defun gjstein-refresh-mu4e-alert-mode-line ()
-    (interactive)
-    (mu4e~proc-kill)
-    (mu4e-alert-enable-mode-line-display)
-    )
-  (run-with-timer 0 60 'gjstein-refresh-mu4e-alert-mode-line))
+;; (use-package mu4e-alert
+;;   :ensure t
+;;   :after mu4e
+;;   :init
+;;   (setq mu4e-alert-interesting-mail-query "flag:unread maildir:/aguestuser/Inbox ")
+;;   (mu4e-alert-enable-mode-line-display)
+;;   (defun gjstein-refresh-mu4e-alert-mode-line ()
+;;     (interactive)
+;;     (mu4e~proc-kill)
+;;     (mu4e-alert-enable-mode-line-display)
+;;     )
+;;   (run-with-timer 0 60 'gjstein-refresh-mu4e-alert-mode-line))

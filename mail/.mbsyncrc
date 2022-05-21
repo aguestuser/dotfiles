@@ -5,14 +5,21 @@
 IMAPAccount aguestuser
 # Address to connect to
 Host 5gdvpfoh6kb2iqbizb37lzk2ddzrwa47m6rpdueg2m656fovmbhoptqd.onion
-Port 993
 User aguestuser@riseup.net
 PassCmd "gpg --no-tty --quiet --decrypt ~/.msmtp-aguestuser.gpg"
-# Use SSL
 AuthMechs PLAIN
-SSLType IMAPS
-SSLVersions TLSv1 TLSv1.1 TLSv1.2
-CertificateFile /home/aguestuser/.cert/riseuponion.pem
+#########################################
+# No SSL (safe IFF connecting to onion)
+#########################################
+SSLType None
+
+##########################
+# SSL configs (if using)
+##########################
+# SSLType IMAPS
+# Port 993
+# SSLVersions TLSv1 TLSv1.1 TLSv1.2
+# CertificateFile /home/aguestuser/.cert/riseuponion.pem
 
 IMAPStore aguestuser-remote
 Account aguestuser

@@ -54,3 +54,6 @@ cp ~/-/dotfiles/mail/mbsync.timer ~/.config/systemd/user/mbsync.timer
 
 ## mu4e
 - https://www.djcbsoftware.nl/code/mu/mu4e/
+
+## gpg conf file
+- is at: ``

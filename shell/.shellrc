@@ -1,0 +1,5 @@
+# shared shell configs
+source ~/-/dotfiles/shell/env/.index
+source ~/-/dotfiles/shell/editor/.index
+source ~/-/dotfiles/shell/lang/.index
+source ~/-/dotfiles/shell/project/.index

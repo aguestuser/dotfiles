@@ -1,0 +1,34 @@
+get_geckodev_commit() {
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "<tag> <branch>"
+        echo "tag is of form FIREFOX_NN_bN_BUILDN or FIREFOX_NN_BUILDN"
+        return 1
+    fi
+    set -x
+    tag=$1
+    branch=$2
+    remote=${branch}
+    base_branch=default
+
+    if [ "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        remote="esr78"
+        base_branch=${branch}
+    fi
+
+    if [ -f .git/refs/tags/${tag} ]; then
+        commit=`cat .git/refs/tags/${tag}`
+    elif [ "$branch" = "esr78" -o "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        commit=`git log ${remote}/branches/default/tip | grep -m1 "${tag} a=release CLOSED TREE DONTBUILD" | sed 's/^.*Tagging \([a-f0-9]*\) with .*$/\1/'`
+        tag=`git cinnabar hg2git ${commit}`
+    else
+        echo "Bad tag"
+        return
+    fi
+    merge_base=`git merge-base ${remote}/branches/${base_branch}/tip gecko-dev/${branch}`
+    chain_len=`git rev-list --count ${merge_base}..${tag}`
+    gecko_dev_len=`git rev-list --count ${merge_base}..gecko-dev/${branch}`
+    target=`expr ${gecko_dev_len} - ${chain_len}`
+    git range-diff ${tag}~..${tag} gecko-dev/${branch}~${target}~..gecko-dev/${branch}~${target}
+    git show gecko-dev/${branch}~${target}
+    set +x
+}

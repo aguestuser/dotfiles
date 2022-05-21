@@ -1,6 +1,6 @@
 # home/shared
 
-if [ ${OS} == 'linux' ]
+if [ ${OS} = 'linux' ]
 then
   # to access flatpak-installed commands, as per:
   # as per: https://www.tomica.net/blog/2019/04/launching-flatpak-applications-from-command-line/
@@ -10,6 +10,7 @@ then
   export PATH=$PATH:/usr/sbin
   export PATH=$PATH:/opt
   export PATH=$PATH:/snap/bin
+  export PATH=$PATH:/home/aguestuser/.mozbuild/git-cinnabar
 else # mac
   export HOME=/Users/${USER}
   export PATH=$PATH:/usr/local/sbin

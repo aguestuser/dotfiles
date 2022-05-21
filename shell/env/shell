@@ -11,11 +11,51 @@ alias untar="tar xvzf"
 alias timezone-change="sudo dpkg-reconfigure tzdata"
 alias chrome-signed-out="google-chrome %U --password-store=basic"
 alias logout="i3-msg exit"
-alias checkmail="torify mbsync -a aguestuser"
+alias checkmail="torify mbsync -a"
+alias checkmail-v="torify mbsync -aV"
 
+#####################################
+# mcfly: bash history search
+# see: https://github.com/cantino/mcfly
+####################################
+export MCFLY_FUZZY=2
+export MCFLY_RESULTS=50
+export MCFLY_INTERFACE_VIEW=BOTTOM
+
+
+#########################
+# powerline
+# https://gist.github.com/cheuerde/f33873b75bde3fe6cd8a
+##################################
+# bash_powerline_loc=/usr/share/powerline/bindings/bash/powerline.sh
+# if [ -f `which powerline-daemon` ]; then
+#   powerline-daemon -q
+#   POWERLINE_BASH_CONTINUATION=1
+#   POWERLINE_BASH_SELECT=1
+#   . ${bash_powerline_loc}
+# fi
+
+##########
+# git
+##########
+
+glo(){
+  git log --oneline "$@"
+}
+
+alias gb="git branch"
+alias gba="git branch -a"
+
+######################
 # zoxide cd helper
 # https://github.com/ajeetdsouza/zoxide
+######################
 eval "$(zoxide init bash)"
+
+
+######################
+# tor stuff
+######################
 
 # tor browser shortcut
 tor-browser-up(){
@@ -24,6 +64,11 @@ tor-browser-up(){
   ./start-tor-browser.desktop
   popd
 }
+
+
+#########
+# random
+#########
 
 # firefox nightly shortcut & override for opening files
 # alias firefox="/opt/firefox-nightly/firefox"

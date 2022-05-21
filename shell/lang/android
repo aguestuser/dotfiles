@@ -1,4 +1,4 @@
-if [ ${OS} == 'linux' ]
+if [ ${OS} = 'linux' ]
 then
   export PATH=/opt/android-studio/bin:$PATH
   export ANDROID_HOME=~/Android/Sdk
@@ -27,7 +27,7 @@ alias as=studio.sh
 
 # emulator fix
 # as per: https://stackoverflow.com/questions/42554337/cannot-launch-avd-in-emulatorqt-library-not-found
-if [ ${OS} == 'linux' ]; then
+if [ ${OS} = 'linux' ]; then
   function emulator { cd "$(dirname "$(which emulator)")" && ./emulator "$@"; }
   export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 fi
@@ -36,3 +36,9 @@ uiautomator() {
   export SDK_PATH=/home/aguestuser/Android/Sdk/ 
   java -Xmx1600M -Dcom.android.uiautomator.bindir="$SDK_PATH/tools" -cp "$SDK_PATH/tools/lib/x86_64/swt.jar":"$SDK_PATH/tools/lib/*" com.android.uiautomator.UiAutomatorViewer
 }
+
+
+# as per: https://gradle.org/install/
+export GRADLE_HOME=/opt/gradle/gradle-7.4.1/bin
+export GRADLE_BIN=/opt/gradle/gradle-7.4.1/bin/gradle
+PATH=$GRADLE_HOME:$PATH

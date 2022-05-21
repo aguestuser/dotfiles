@@ -1,0 +1,7 @@
+source ~/-/dotfiles/shell/lang/android
+source ~/-/dotfiles/shell/lang/golang
+source ~/-/dotfiles/shell/lang/java
+source ~/-/dotfiles/shell/lang/javascript
+source ~/-/dotfiles/shell/lang/python
+source ~/-/dotfiles/shell/lang/ruby
+source ~/-/dotfiles/shell/lang/rust

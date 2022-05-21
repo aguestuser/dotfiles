@@ -1,0 +1,13 @@
+# base configs
+source ~/-/dotfiles/shell/env/os
+source ~/-/dotfiles/shell/env/path
+
+# configs
+source ~/-/dotfiles/shell/env/docker
+source ~/-/dotfiles/shell/env/gcloud
+source ~/-/dotfiles/shell/env/git
+source ~/-/dotfiles/shell/env/keys
+source ~/-/dotfiles/shell/env/screen
+source ~/-/dotfiles/shell/env/shell
+source ~/-/dotfiles/shell/env/ssh
+source ~/-/dotfiles/shell/env/sync

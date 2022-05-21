@@ -1,4 +1,5 @@
-if [ "$(uname)" == 'Darwin' ]
+# TODO: provide bash-compatible alternative!
+if [ "$(uname)" = 'Darwin' ]
 then
    export OS=osx
    export BIN="/usr/local/bin"

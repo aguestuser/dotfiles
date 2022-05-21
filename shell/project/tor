@@ -1,0 +1,271 @@
+export TOR_HOME=/home/aguestuser/-/tor/code
+
+inject_geckoview() {
+  if [ "$#" = 0 ]; then
+    echo "USAGE: inject_geckoview <gv_versionX.Y>"
+    return 0
+  fi
+
+  version=$1
+  gv_src=$(find . -name "*omni-${version}*.aar")
+  gv_dst=$(find ~/.gradle/caches -name "geckoview*-omni-${version}*.aar")
+
+  echo "Copying from: ${gv_src}"
+  echo "to: ${gv_dst}"
+  echo "Press any key to continue..."
+  read continue
+
+  cp $gv_src $gv_dst
+  echo "done."
+}
+
+tag_fenix_android() {
+  if [ "$#" = 0 ]; then
+    echo "ffver \"build + num\" tbseries rebase"
+    return 0
+  fi
+  FFVER=$1
+  if [ -z "${FFVER}" ]; then
+    echo "Specify firefox version (68.2.0)"
+    return 1
+  fi
+  BUILD=$2
+  if [ -z "${BUILD}" ]; then
+    echo "Specify build number (build1)"
+    return 1
+  fi
+  TBSERIES=$3
+  if [ -z "${TBSERIES}" ]; then
+    echo "Specify Tor Browser series (ex. 9.0)"
+    return 1
+  fi
+  REBASE=$4
+  if [ -z "${REBASE}" ]; then
+    echo "Rebase number (ex. 1)"
+    return 1
+  fi
+  REBASE_COMMENT=
+  if [ "${REBASE}" -ne "1" ]; then
+    REBASE_COMMENT=" (rebase ${REBASE})"
+  fi
+
+  CHANNEL=stable
+  if `echo ${TBSERIES} | grep -q 11\.5`; then
+    CHANNEL=alpha
+  fi
+
+  git tag -s tor-browser-${FFVER}-${TBSERIES}-${REBASE}-${BUILD} -m "Tagging ${BUILD}${REBASE_COMMENT} for ${FFVER}-based ${CHANNEL}"
+
+  echo "> tagged! push away!"
+}
+
+tag_mozac() {
+  # TODO: check `pwd` to enforce being in correct repo!
+  if [ "$#" = 0 ]; then
+    echo "mozacver \"build + num\" tbseries rebase"
+    return 0
+  fi
+  MOZACVER=$1
+  if [ -z "${MOZACVER}" ]; then
+    echo "Specify mozac version (68.2.0)"
+    return 1
+  fi
+  BUILD=$2
+  if [ -z "${BUILD}" ]; then
+    echo "Specify build number (build1)"
+    return 1
+  fi
+  TBSERIES=$3
+  if [ -z "${TBSERIES}" ]; then
+    echo "Specify Tor Browser series (ex. 9.0)"
+    return 1
+  fi
+  REBASE=$4
+  if [ -z "${REBASE}" ]; then
+    echo "Rebase number (ex. 1)"
+    return 1
+  fi
+  REBASE_COMMENT=
+  if [ "${REBASE}" -ne "1" ]; then
+    REBASE_COMMENT=" (rebase ${REBASE})"
+  fi
+
+  CHANNEL=stable
+  if `echo ${TBSERIES} | grep -q 11\.0`; then
+    CHANNEL=alpha
+  fi
+
+  git tag -s android-components-${MOZACVER}-${TBSERIES}-${REBASE}-${BUILD} -m "Tagging ${BUILD}${REBASE_COMMENT} for ${MOZACVER}-based ${CHANNEL}"
+  echo "> tagged! push away!"
+}
+
+tag_gv() {
+    # set -x
+    cur_branch=`cat .git/HEAD | cut -d/ -f3`
+
+    if [ "$#" = 0 ]; then
+        echo "\"build + num\""
+        return 0
+    fi
+
+    cur_branch_wo_prefix=`echo $cur_branch | cut -c 11-`
+    FFVER=`echo $cur_branch_wo_prefix | cut -d- -f1`
+    if [ -z "${FFVER}" ]; then
+        echo "Specify firefox version (68.2.0)"
+        return 1
+    fi
+    BUILD=$1
+    if [ -z "${BUILD}" ]; then
+        echo "Specify build number (build1)"
+        return 1
+    fi
+    TBSERIES=`echo $cur_branch_wo_prefix | cut -d- -f2`
+    if [ -z "${TBSERIES}" ]; then
+        echo "Specify Tor Browser series (ex. 9.0)"
+        return 1
+    fi
+    REBASE=`echo $cur_branch_wo_prefix | cut -d- -f3`
+    if [ -z "${REBASE}" ]; then
+        echo "Rebase number (ex. 1)"
+        return 1
+    fi
+    REBASE_COMMENT=
+    if [ "${REBASE}" -ne "1" ]; then
+        REBASE_COMMENT=" (rebase ${REBASE})"
+    fi
+
+    BUILD=$1
+    if [ -z "${BUILD}" ]; then
+        echo "Specify build number (build1)"
+        return 1
+    fi
+
+    CHANNEL=stable
+    if `echo ${cur_branch} | grep -q \\\-11\.5`; then
+        CHANNEL=alpha
+    fi
+    set +x
+
+    #git tag -s tor-browser-${FFVER}-${TBSERIES}-${REBASE}-${BUILD} -m "Tagging ${BUILD}${REBASE_COMMENT} for ${FFVER}-based ${CHANNEL}"
+    git tag -s ${cur_branch}-${BUILD} -m "Tagging ${BUILD}${REBASE_COMMENT} for ${FFVER}-based ${CHANNEL}"
+}
+
+get_geckodev_commit() {
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "<tag> <branch>"
+        echo "tag is of form FIREFOX_NN_NbN_BUILDN or FIREFOX_NN_BUILDN"
+        return 1
+    fi
+    set -x
+    tag=$1
+    branch=$2
+    remote=${branch}
+    base_branch=default
+
+    if [ "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        remote="esr78"
+        base_branch=${branch}
+    fi
+
+    if [ -f .git/refs/tags/${tag} ]; then
+        commit=`cat .git/refs/tags/${tag}`
+    elif [ "$branch" = "esr78" -o "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        commit=`git log ${remote}/branches/default/tip | grep -m1 "${tag} a=release CLOSED TREE DONTBUILD" | sed 's/^.*Tagging \([a-f0-9]*\) with .*$/\1/'`
+        tag=`git cinnabar hg2git ${commit}`
+    else
+        echo "Bad tag"
+        return
+    fi
+    merge_base=`git merge-base ${remote}/branches/${base_branch}/tip gecko-dev/${branch}`
+    chain_len=`git rev-list --count ${merge_base}..${tag}`
+    gecko_dev_len=`git rev-list --count ${merge_base}..gecko-dev/${branch}`
+    target=`expr ${gecko_dev_len} - ${chain_len}`
+    git range-diff ${tag}~..${tag} gecko-dev/${branch}~${target}~..gecko-dev/${branch}~${target}
+    git show gecko-dev/${branch}~${target}
+    set +x
+}
+
+get_hg_commit() {
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "<tag> <branch>"
+        return 1
+    fi
+    set -x
+    tag=$1
+    branch=$2
+    remote=${branch}
+    base_branch=default
+
+    if [ "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        remote="esr78"
+        base_branch=${branch}
+    fi
+
+    if [ -f .git/refs/tags/${tag} ]; then
+        commit=`cat .git/refs/tags/${tag}`
+    elif [ "$branch" = "esr78" -o "$branch" = "FIREFOX_ESR_78_6_X_RELBRANCH" ]; then
+        commit=`git log ${remote}/branches/default/tip | grep -m1 "${tag} a=release CLOSED TREE DONTBUILD" | sed 's/^.*Tagging \([a-f0-9]*\) with .*$/\1/'`
+        tag=`git cinnabar hg2git ${commit}`
+    else
+        echo "Bad tag"
+        return
+    fi
+    merge_base=`git merge-base ${remote}/branches/${base_branch}/tip gecko-dev/${branch}`
+    chain_len=`git rev-list --count ${merge_base}..${tag}`
+    gecko_dev_len=`git rev-list --count ${merge_base}..gecko-dev/${branch}`
+    target=`expr ${gecko_dev_len} - ${chain_len}`
+    git show gecko-dev/${branch}~${target}
+    set +x
+}
+
+# tag_torbrowser() {
+#     # TODO: check `pwd` to enforce being in correct repo!
+#     set -x
+#     cur_branch=`cat .git/HEAD | cut -d/ -f3`
+
+#     if [ "$#" = 0 ]; then
+#         echo "\"build + num\""
+#         return 0
+#     fi
+
+#     cur_branch_wo_prefix=`echo $cur_branch | cut -c 13-`
+#     FFVER=`echo $cur_branch_wo_prefix | cut -d- -f1`
+#     if [ -z "${FFVER}" ]; then
+#         echo "Specify firefox version (68.2.0)"
+#         return 1
+#     fi
+#     BUILD=$1
+#     if [ -z "${BUILD}" ]; then
+#         echo "Specify build number (build1)"
+#         return 1
+#     fi
+#     TBSERIES=`echo $cur_branch_wo_prefix | cut -d- -f2`
+#     if [ -z "${TBSERIES}" ]; then
+#         echo "Specify Tor Browser series (ex. 9.0)"
+#         return 1
+#     fi
+#     REBASE=`echo $cur_branch_wo_prefix | cut -d- -f3`
+#     if [ -z "${REBASE}" ]; then
+#         echo "Rebase number (ex. 1)"
+#         return 1
+#     fi
+#     REBASE_COMMENT=
+#     if [ "${REBASE}" -ne "1" ]; then
+#         REBASE_COMMENT=" (rebase ${REBASE})"
+#     fi
+
+#     BUILD=$1
+#     if [ -z "${BUILD}" ]; then
+#         echo "Specify build number (build1)"
+#         return 1
+#     fi
+
+#     CHANNEL=stable
+#     if `echo ${cur_branch} | grep -q \\\-11\.5`; then
+#         CHANNEL=alpha
+#     fi
+#     set +x
+#     git tag -s ${cur_branch}-${BUILD} -m "Tagging ${BUILD}${REBASE_COMMENT} for ${FFVER}-based ${CHANNEL}"
+
+#     echo "> tagged! push to aguestuser and ask matt to finish!"
+# }

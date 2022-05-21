@@ -15,4 +15,4 @@ ExecStop=killall emacs
 KillMode=mixed
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

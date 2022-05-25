@@ -40,7 +40,7 @@ export MCFLY_INTERFACE_VIEW=BOTTOM
 ##########
 
 glo(){
-  git log --oneline "$@"
+  git log --oneline "$@";
 }
 
 alias gb="git branch"

@@ -33,14 +33,22 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ###########
 
 # Standard plugins in $ZSH/plugins/, Custom plugins in  $ZSH_CUSTOM/plugins/
+
+
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
+source ~/-/dotfiles/shell/.shellrc
+
+plugins=(git zsh-z zsh-syntax-highlighting)
+
 source $ZSH/oh-my-zsh.sh
-plugins=( zsh-z )
 
 #########
 # FLAGS #
 #########
 
-# Uncomment the following line to enable command auto-correction.
+# command auto-correction.
 ENABLE_CORRECTION="true"
 
 ##################
@@ -53,18 +61,8 @@ eval "$(mcfly init zsh)"
 # zsh-z, see: https://github.com/agkozak/zsh-z
 compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}
 
-# package manager auto-added stuff (TODO: move these to appropriate folders)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-. "$HOME/.cargo/env"
-eval "$(pyenv init -)"
-
-autoload -U compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
-
-source ~/-/dotfiles/shell/.shellrc
-
-# TODO: fix gopass autocompletion: https://github.com/gopasspw/gopass/blob/master/docs/setup.md#enable-z-shell-auto-completion
+# enable gopass completion (see: https://github.com/gopasspw/gopass/issues/389)
+source <(gopass completion bash)
 
 ################
 # UNUSED FLAGS #

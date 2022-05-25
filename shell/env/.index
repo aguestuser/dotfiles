@@ -9,5 +9,4 @@ source ~/-/dotfiles/shell/env/git
 source ~/-/dotfiles/shell/env/keys
 source ~/-/dotfiles/shell/env/screen
 source ~/-/dotfiles/shell/env/shell
-source ~/-/dotfiles/shell/env/ssh
 source ~/-/dotfiles/shell/env/sync

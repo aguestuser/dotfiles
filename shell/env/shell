@@ -120,7 +120,7 @@ sharepic-tor(){
   import png:- | apaste -h | tee >(xclip) >(xargs notify-send "Upload Complete")
 }
 
-if [ ${OS} == 'linux' ]
+if [ ${OS} = 'linux' ]
 then
   alias cpt="tmux save-buffer - | xclip -selection clipboard"
 else # mac

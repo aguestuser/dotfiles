@@ -13,9 +13,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # THEME #
 #########
 
+source ~/-/dotfiles/shell/ssh # <-- requries console input
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -30,8 +33,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ###########
 
 # Standard plugins in $ZSH/plugins/, Custom plugins in  $ZSH_CUSTOM/plugins/
-plugins=(zsh-z)
 source $ZSH/oh-my-zsh.sh
+plugins=( zsh-z )
 
 #########
 # FLAGS #
@@ -59,7 +62,6 @@ eval "$(pyenv init -)"
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-# TODO: pull out bash-specific things from these...
 source ~/-/dotfiles/shell/.shellrc
 
 # TODO: fix gopass autocompletion: https://github.com/gopasspw/gopass/blob/master/docs/setup.md#enable-z-shell-auto-completion

@@ -64,6 +64,15 @@ compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}
 # enable gopass completion (see: https://github.com/gopasspw/gopass/issues/389)
 source <(gopass completion bash)
 
+# Wave config auto-added by bin/setup
+source /home/aguestuser/.waverc
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/aguestuser/google-cloud-sdk/path.zsh.inc' ]; then . '/home/aguestuser/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/aguestuser/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aguestuser/google-cloud-sdk/completion.zsh.inc'; fi
+
 ################
 # UNUSED FLAGS #
 ################

@@ -46,6 +46,10 @@ glo(){
 alias gb="git branch"
 alias gba="git branch -a"
 
+gco(){
+  git checkout "$@";
+}
+
 ######################
 # zoxide cd helper
 # https://github.com/ajeetdsouza/zoxide

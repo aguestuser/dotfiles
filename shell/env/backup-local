@@ -3,7 +3,7 @@
 ##########
 # setup:
 ##########
-# sudo ln -s /home/aguestuser/-/dotfiles/bash/env/backup-local /usr/local/bin/backup-local
+# sudo ln -s /home/aguestuser/-/dotfiles/shell/env/backup-local /usr/local/bin/backup-local
 # cat ~/-/dotfiles/bash/env/backup-cronjob | sudo tee -a /etc/crontab
 
 #########
